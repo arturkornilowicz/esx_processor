@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class NegatedFormula extends EsxElement {
+public class NegatedFormula extends UnaryFormula {
 
     private String bracketed;
     private String position;
@@ -24,6 +24,6 @@ public class NegatedFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "not " + getArg();
     }
 }

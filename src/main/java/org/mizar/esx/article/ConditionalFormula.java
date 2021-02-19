@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ConditionalFormula extends EsxElement {
+public class ConditionalFormula extends BinaryFormula {
 
     private String bracketed;
     private String position;
@@ -24,6 +24,6 @@ public class ConditionalFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getArg1() + " implies " + getArg2();
     }
 }

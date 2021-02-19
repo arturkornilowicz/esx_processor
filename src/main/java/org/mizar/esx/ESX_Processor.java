@@ -24,6 +24,41 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private BiconditionalFormula processBiconditionalFormula(Element e) {
+        BiconditionalFormula result = new BiconditionalFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private BinaryFormula processBinaryFormula(Element e) {
+        BinaryFormula result = new BinaryFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private ConditionalFormula processConditionalFormula(Element e) {
+        ConditionalFormula result = new ConditionalFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private ConjunctiveFormula processConjunctiveFormula(Element e) {
+        ConjunctiveFormula result = new ConjunctiveFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private ExistentialQuantifierFormula processExistentialQuantifierFormula(Element e) {
+        ExistentialQuantifierFormula result = new ExistentialQuantifierFormula(e);
+        result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
+        result.setScope(processFormula(e.elements().get(1)));
+        return result;
+    }
+
     private ExplicitlyQualifiedSegment processExplicitlyQualifiedSegment(Element e) {
         ExplicitlyQualifiedSegment result = new ExplicitlyQualifiedSegment();
         result.setVariables(processVariables(e.element("Variables")));
@@ -34,6 +69,24 @@ public class ESX_Processor extends XMLApplication {
     private FormulaInterface processFormula(Element e) {
         FormulaInterface result = null;
         switch (e.getName()) {
+            case "Biconditional-Formula":
+                result = processBiconditionalFormula(e);
+                break;
+            case "Conditional-Formula":
+                result = processConditionalFormula(e);
+                break;
+            case "Conjunctive-Formula":
+                result = processConjunctiveFormula(e);
+                break;
+            case "Existential-Quantifier-Formula":
+                result = processExistentialQuantifierFormula(e);
+                break;
+            case "Negated-Formula":
+                result = processNegatedFormula(e);
+                break;
+            case "Qualifying-Formula":
+                result = processQualifyingFormula(e);
+                break;
             case "Relation-Formula":
                 result = processRelationFormula(e);
                 break;
@@ -70,6 +123,12 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private NegatedFormula processNegatedFormula(Element e) {
+        NegatedFormula result = new NegatedFormula(e);
+        result.setArg(processFormula(e.elements().get(0)));
+        return result;
+    }
+
     private NumeralTerm processNumeralTerm(Element e) {
         return new NumeralTerm(e);
     }
@@ -78,6 +137,13 @@ public class ESX_Processor extends XMLApplication {
         Proposition result = new Proposition();
         result.setLabel(processLabel(e.element("Label")));
         result.setFormula(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private QualifyingFormula processQualifyingFormula(Element e) {
+        QualifyingFormula result = new QualifyingFormula(e);
+        result.setTerm(processTerm(e.elements().get(0)));
+        result.setType(processType(e.elements().get(1)));
         return result;
     }
 

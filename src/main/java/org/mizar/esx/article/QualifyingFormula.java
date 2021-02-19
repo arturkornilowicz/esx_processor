@@ -9,11 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class QualifyingFormula extends EsxElement {
+public class QualifyingFormula extends EsxElement implements FormulaInterface {
 
     private String bracketed;
     private String position;
     private String sort;
+
+    private TermInterface term;
+    private TypeInterface type;
 
     public QualifyingFormula(Element element) {
         super(element);
@@ -24,6 +27,6 @@ public class QualifyingFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return term + " is " + type;
     }
 }

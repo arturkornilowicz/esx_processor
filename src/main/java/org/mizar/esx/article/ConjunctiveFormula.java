@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ConjunctiveFormula extends EsxElement {
+public class ConjunctiveFormula extends BinaryFormula {
 
     private String bracketed;
     private String position;
@@ -24,6 +24,6 @@ public class ConjunctiveFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getArg1() + " & " + getArg2();
     }
 }

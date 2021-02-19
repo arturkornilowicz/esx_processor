@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ExistentialQuantifierFormula extends EsxElement {
+public class ExistentialQuantifierFormula extends QuantifierFormula {
 
     private String bracketed;
     private String position;
@@ -24,6 +24,6 @@ public class ExistentialQuantifierFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "ex " + getVariableSegments() + " st " + getScope();
     }
 }
