@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class TextProper extends EsxElement {
+public class TextProper extends Block {
 
     private String articleext;
     private String articleid;

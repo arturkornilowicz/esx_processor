@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Variables extends EsxElement {
 
+    private ArrayList<Variable> variables = new ArrayList<>();
+
     public Variables(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return variables.toString();
     }
 }

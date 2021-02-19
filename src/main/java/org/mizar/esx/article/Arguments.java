@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Arguments extends EsxElement {
 
+    private ArrayList<TermInterface> arguments = new ArrayList<>();
+
     public Arguments(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return arguments.toString();
     }
 }

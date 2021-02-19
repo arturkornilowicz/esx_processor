@@ -7,9 +7,11 @@ import org.dom4j.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
 public class EsxElement {
 
     private Element element;
+
+    @Override
+    public String toString() { return element.getName(); }
 }

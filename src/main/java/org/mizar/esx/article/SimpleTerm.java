@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SimpleTerm extends EsxElement {
+public class SimpleTerm extends EsxElement implements TermInterface {
 
     private String idnr;
     private String origin;
@@ -32,6 +32,6 @@ public class SimpleTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

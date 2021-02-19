@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StandardType extends EsxElement {
+public class StandardType extends EsxElement implements TypeInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -42,6 +42,6 @@ public class StandardType extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

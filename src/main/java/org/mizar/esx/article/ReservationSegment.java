@@ -13,6 +13,10 @@ public class ReservationSegment extends EsxElement {
 
     private String position;
 
+    private Variables variables;
+    private VariableSegments variableSegments;
+    private TypeInterface type;
+
     public ReservationSegment(Element element) {
         super(element);
         this.position = Misc.assignAttrValue(element,"position");
@@ -20,6 +24,6 @@ public class ReservationSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return variables + " for " + type;
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SectionPragma extends EsxElement {
+public class SectionPragma extends Item {
 
     public SectionPragma(Element element) {
         super(element);

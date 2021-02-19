@@ -9,7 +9,9 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Reservation extends EsxElement {
+public class Reservation extends Item {
+
+    private ArrayList<ReservationSegment> reservationSegments = new ArrayList<>();
 
     public Reservation(Element element) {
         super(element);
@@ -17,6 +19,6 @@ public class Reservation extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "reserve " + reservationSegments.toString();
     }
 }

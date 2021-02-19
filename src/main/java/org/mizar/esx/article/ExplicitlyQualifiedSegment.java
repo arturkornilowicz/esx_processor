@@ -9,9 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ExplicitlyQualifiedSegment extends EsxElement {
+public class ExplicitlyQualifiedSegment extends EsxElement implements VariableSegmentInterface {
 
     private String position;
+
+    private Variables variables;
+    private TypeInterface type;
 
     public ExplicitlyQualifiedSegment(Element element) {
         super(element);
@@ -20,6 +23,6 @@ public class ExplicitlyQualifiedSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return variables + " " + type;
     }
 }

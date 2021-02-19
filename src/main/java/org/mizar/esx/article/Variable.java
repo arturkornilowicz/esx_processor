@@ -32,6 +32,6 @@ public class Variable extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

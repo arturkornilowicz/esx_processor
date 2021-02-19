@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class VariableSegments extends EsxElement {
 
+    private ArrayList<VariableSegmentInterface> variableSegments = new ArrayList<>();
+
     public VariableSegments(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return variableSegments.toString();
     }
 }

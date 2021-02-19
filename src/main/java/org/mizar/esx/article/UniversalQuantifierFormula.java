@@ -9,11 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class UniversalQuantifierFormula extends EsxElement {
+public class UniversalQuantifierFormula extends EsxElement implements FormulaInterface {
 
     private String bracketed;
     private String position;
     private String sort;
+
+    private VariableSegments variableSegments;
+    private FormulaInterface scope;
 
     public UniversalQuantifierFormula(Element element) {
         super(element);
@@ -24,6 +27,6 @@ public class UniversalQuantifierFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "" + variableSegments + " " + scope;
     }
 }

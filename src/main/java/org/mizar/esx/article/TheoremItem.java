@@ -9,9 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class TheoremItem extends EsxElement {
+public class TheoremItem extends Item {
 
     private String MMLId;
+
+    private Proposition proposition;
+    private JustificationInterface justification;
 
     public TheoremItem(Element element) {
         super(element);
@@ -20,6 +23,6 @@ public class TheoremItem extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "theorem ::" + getMMLId() + "\n" + proposition + "\n" + justification + ";";
     }
 }

@@ -15,6 +15,8 @@ public class Block extends EsxElement {
     private String kind;
     private String position;
 
+    private List<Item> items = new ArrayList<>();
+
     public Block(Element element) {
         super(element);
         this.endposition = Misc.assignAttrValue(element,"endposition");
@@ -24,6 +26,13 @@ public class Block extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        String result = getElement().getName() + "\n";
+        for (Item item: items)
+            result += item + "\n";
+        return result;
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
     }
 }

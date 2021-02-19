@@ -28,6 +28,6 @@ public class Label extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return idnr.equals("0") ? "" : (spelling + ":");
     }
 }

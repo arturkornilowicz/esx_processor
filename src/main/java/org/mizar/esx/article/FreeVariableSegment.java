@@ -9,9 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class FreeVariableSegment extends EsxElement {
+public class FreeVariableSegment extends EsxElement implements VariableSegmentInterface {
 
     private String position;
+
+    private Variable variable;
+    private TypeInterface type;
 
     public FreeVariableSegment(Element element) {
         super(element);
@@ -20,6 +23,6 @@ public class FreeVariableSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return variable.toString();
     }
 }

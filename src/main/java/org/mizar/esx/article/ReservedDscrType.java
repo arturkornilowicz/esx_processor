@@ -9,12 +9,15 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ReservedDscrType extends EsxElement {
+public class ReservedDscrType extends EsxElement implements TypeInterface {
 
     private String idnr;
     private String nr;
     private String position;
     private String sort;
+
+    private Substitutions substitutions;
+    private TypeInterface type;
 
     public ReservedDscrType(Element element) {
         super(element);
@@ -26,6 +29,6 @@ public class ReservedDscrType extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return type.toString();
     }
 }

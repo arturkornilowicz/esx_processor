@@ -13,6 +13,9 @@ public class Proposition extends EsxElement {
 
     private String position;
 
+    private Label label;
+    private FormulaInterface formula;
+
     public Proposition(Element element) {
         super(element);
         this.position = Misc.assignAttrValue(element,"position");
@@ -20,6 +23,6 @@ public class Proposition extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return label + " " + formula;
     }
 }

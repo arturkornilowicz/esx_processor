@@ -15,6 +15,8 @@ public class Item extends EsxElement {
     private String kind;
     private String position;
 
+    private Block block;
+
     public Item(Element element) {
         super(element);
         this.endposition = Misc.assignAttrValue(element,"endposition");
@@ -24,6 +26,6 @@ public class Item extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getElement().getName() + (block != null ? block : "");
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class NumeralTerm extends EsxElement {
+public class NumeralTerm extends EsxElement implements TermInterface {
 
     private String number;
     private String position;
@@ -24,6 +24,6 @@ public class NumeralTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return number;
     }
 }

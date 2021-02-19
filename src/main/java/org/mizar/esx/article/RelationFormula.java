@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class RelationFormula extends EsxElement {
+public class RelationFormula extends EsxElement implements FormulaInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -25,6 +25,8 @@ public class RelationFormula extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private Arguments arguments;
 
     public RelationFormula(Element element) {
         super(element);
@@ -46,6 +48,6 @@ public class RelationFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + "!" + arguments + "!";
     }
 }
