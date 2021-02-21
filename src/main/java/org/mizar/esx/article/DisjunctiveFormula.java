@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class DisjunctiveFormula extends EsxElement {
+public class DisjunctiveFormula extends BinaryFormula {
 
     private String bracketed;
     private String position;
@@ -24,6 +24,6 @@ public class DisjunctiveFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getArg1() + " or " + getArg2();
     }
 }

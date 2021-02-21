@@ -24,6 +24,8 @@ public class Attribute extends EsxElement {
     private String sort;
     private String spelling;
 
+    private Arguments arguments;
+
     public Attribute(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -42,6 +44,6 @@ public class Attribute extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + " [" + arguments + "]";
     }
 }

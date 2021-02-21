@@ -9,10 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ClusteredType extends EsxElement {
+public class ClusteredType extends EsxElement implements TypeInterface {
 
     private String position;
     private String sort;
+
+    private AdjectiveCluster adjectiveCluster;
+    private TypeInterface type;
 
     public ClusteredType(Element element) {
         super(element);
@@ -22,6 +25,6 @@ public class ClusteredType extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return adjectiveCluster + " " + type;
     }
 }

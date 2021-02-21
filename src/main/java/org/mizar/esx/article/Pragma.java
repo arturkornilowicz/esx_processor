@@ -1,15 +1,15 @@
 package org.mizar.esx.article;
 
-import java.util.*;
 import lombok.*;
 import org.dom4j.*;
-import org.mizar.esx.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
 
-public class Pragma extends EsxElement {
+public class Pragma extends Item {
+
+    private PragmaInterface pragma;
 
     public Pragma(Element element) {
         super(element);
@@ -17,6 +17,6 @@ public class Pragma extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return pragma.toString();
     }
 }

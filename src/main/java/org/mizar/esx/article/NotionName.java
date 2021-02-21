@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class NotionName extends EsxElement {
+public class NotionName extends EsxElement implements PragmaInterface {
 
     private String inscription;
     private String position;
@@ -21,7 +21,5 @@ public class NotionName extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return "::$N " + inscription; }
 }

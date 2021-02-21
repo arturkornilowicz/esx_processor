@@ -3,6 +3,7 @@ package org.mizar.esx;
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.article.*;
+import org.mizar.esx.article.Attribute;
 import org.mizar.esx.xml.XMLApplication;
 import org.mizar.esx.errors.*;
 
@@ -17,10 +18,23 @@ public class ESX_Processor extends XMLApplication {
         super(pathName, fileName, fileExtension);
     }
 
+    private AdjectiveCluster processAdjectiveCluster(Element e) {
+        AdjectiveCluster result = new AdjectiveCluster(e);
+        for (Element element: e.elements())
+           result.getAttributes().add(processAttribute(element));
+        return result;
+    }
+
     private Arguments processArguments(Element e) {
         Arguments result = new Arguments();
         for (Element element : e.elements())
             result.getArguments().add(processTerm(element));
+        return result;
+    }
+
+    private Attribute processAttribute(Element e) {
+        Attribute result = new Attribute(e);
+        result.setArguments(processArguments(e.element("Arguments")));
         return result;
     }
 
@@ -38,6 +52,17 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Canceled processCanceled(Element e) {
+        return new Canceled(e);
+    }
+
+    private ClusteredType processClusteredType(Element e) {
+        ClusteredType result = new ClusteredType(e);
+        result.setAdjectiveCluster(processAdjectiveCluster(e.element("Adjective-Cluster")));
+        result.setType(processType(e.elements().get(1)));
+        return result;
+    }
+
     private ConditionalFormula processConditionalFormula(Element e) {
         ConditionalFormula result = new ConditionalFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
@@ -47,6 +72,13 @@ public class ESX_Processor extends XMLApplication {
 
     private ConjunctiveFormula processConjunctiveFormula(Element e) {
         ConjunctiveFormula result = new ConjunctiveFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private DisjunctiveFormula processDisjunctiveFormula(Element e) {
+        DisjunctiveFormula result = new DisjunctiveFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
         result.setArg2(processFormula(e.elements().get(1)));
         return result;
@@ -77,6 +109,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Conjunctive-Formula":
                 result = processConjunctiveFormula(e);
+                break;
+            case "Disjunctive-Formula":
+                result = processDisjunctiveFormula(e);
                 break;
             case "Existential-Quantifier-Formula":
                 result = processExistentialQuantifierFormula(e);
@@ -113,6 +148,12 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private InfixTerm processInfixTerm(Element e) {
+        InfixTerm result = new InfixTerm(e);
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
     private JustificationInterface processJustification(Element e) {
         JustificationInterface result = null;
         return result;
@@ -129,8 +170,27 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private NotionName processNotionName(Element e) {
+        return new NotionName(e);
+    }
+
     private NumeralTerm processNumeralTerm(Element e) {
         return new NumeralTerm(e);
+    }
+
+    private Pragma processPragma(Element e) {
+        Pragma result = new Pragma(e);
+        switch (e.elements().get(0).getName()) {
+            case "Canceled":
+                result.setPragma(processCanceled(e.elements().get(0)));
+                break;
+            case "Notion-Name":
+                result.setPragma(processNotionName(e.elements().get(0)));
+                break;
+            default:
+                Errors.error(e,"UNKNOWN PRAGMA");
+        }
+        return result;
     }
 
     private Proposition processProposition(Element e) {
@@ -175,6 +235,14 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Restriction processRestriction(Element e) {
+        if (e == null)
+            return null;
+        Restriction result = new Restriction(e);
+        result.setFormula(processFormula(e.elements().get(0)));
+        return result;
+    }
+
     private SectionPragma processSection(Element e) {
         SectionPragma result = new SectionPragma(e);
         return result;
@@ -197,6 +265,9 @@ public class ESX_Processor extends XMLApplication {
     private TermInterface processTerm(Element e) {
         TermInterface result = null;
         switch (e.getName()) {
+            case "Infix-Term":
+                result = processInfixTerm(e);
+                break;
             case "Numeral-Term":
                 result = processNumeralTerm(e);
                 break;
@@ -224,6 +295,9 @@ public class ESX_Processor extends XMLApplication {
     private TypeInterface processType(Element e) {
         TypeInterface result = null;
         switch (e.getName()) {
+            case "Clustered-Type":
+                result = processClusteredType(e);
+                break;
             case "ReservedDscr-Type":
                 result = processReservedDscrType(e);
                 break;
@@ -239,7 +313,8 @@ public class ESX_Processor extends XMLApplication {
     private UniversalQuantifierFormula processUniversalQuantifierFormula(Element e) {
         UniversalQuantifierFormula result = new UniversalQuantifierFormula(e);
         result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
-        result.setScope(processFormula(e.elements().get(1)));
+        result.setRestriction(processRestriction(e.element("Restriction")));
+        result.setScope(processFormula(e.elements().get(e.elements().size()-1)));
         return result;
     }
 
@@ -282,6 +357,9 @@ public class ESX_Processor extends XMLApplication {
     private Item processItem(Element e) {
         Item result = null;
         switch (e.getName()) {
+            case "Pragma":
+                result = processPragma(e);
+                break;
             case "Reservation":
                 result = processReservation(e);
                 break;

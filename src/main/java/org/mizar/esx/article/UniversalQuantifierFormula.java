@@ -15,6 +15,8 @@ public class UniversalQuantifierFormula extends QuantifierFormula {
     private String position;
     private String sort;
 
+    private Restriction restriction;
+
     public UniversalQuantifierFormula(Element element) {
         super(element);
         this.bracketed = Misc.assignAttrValue(element,"bracketed");
@@ -24,6 +26,6 @@ public class UniversalQuantifierFormula extends QuantifierFormula {
 
     @Override
     public String toString() {
-        return "for " + getVariableSegments() + " holds " + getScope();
+        return "for " + getVariableSegments() + (restriction != null ? " st " + restriction : "") + " holds " + getScope();
     }
 }

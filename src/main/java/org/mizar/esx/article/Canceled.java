@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Canceled extends EsxElement {
+public class Canceled extends EsxElement implements PragmaInterface {
 
     private String MMLId;
     private String amount;
@@ -25,7 +25,5 @@ public class Canceled extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return "::$" + kind + " " + amount; }
 }

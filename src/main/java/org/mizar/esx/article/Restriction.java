@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Restriction extends EsxElement {
 
+    FormulaInterface formula;
+
     public Restriction(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return formula.toString();
     }
 }

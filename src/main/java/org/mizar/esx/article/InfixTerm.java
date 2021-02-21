@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class InfixTerm extends EsxElement {
+public class InfixTerm extends EsxElement implements TermInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -23,6 +23,8 @@ public class InfixTerm extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private Arguments arguments;
 
     public InfixTerm(Element element) {
         super(element);
@@ -41,7 +43,5 @@ public class InfixTerm extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return spelling + " [" + arguments + "]"; }
 }
