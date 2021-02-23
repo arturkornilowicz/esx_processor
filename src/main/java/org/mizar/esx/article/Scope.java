@@ -9,14 +9,16 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class DefinitionItem extends Item {
+public class Scope extends EsxElement {
 
-    public DefinitionItem(Element element) {
+    FormulaInterface formula;
+
+    public Scope(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return formula.toString();
     }
 }

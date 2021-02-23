@@ -33,6 +33,7 @@ public class Block extends EsxElement {
     }
 
     public void addItem(Item item) {
+        System.out.println("+++++ Item \"" + item + "\" added.");
         items.add(item);
     }
 }

@@ -9,9 +9,9 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class DefinitionItem extends Item {
+public class DefinitionalBlock extends Block {
 
-    public DefinitionItem(Element element) {
+    public DefinitionalBlock(Element element) {
         super(element);
     }
 

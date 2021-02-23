@@ -77,6 +77,11 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private DefinitionItem processDefinitionItem(Element e) {
+        DefinitionItem result = new DefinitionItem(e);
+        return result;
+    }
+
     private DisjunctiveFormula processDisjunctiveFormula(Element e) {
         DisjunctiveFormula result = new DisjunctiveFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
@@ -87,7 +92,7 @@ public class ESX_Processor extends XMLApplication {
     private ExistentialQuantifierFormula processExistentialQuantifierFormula(Element e) {
         ExistentialQuantifierFormula result = new ExistentialQuantifierFormula(e);
         result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
-        result.setScope(processFormula(e.elements().get(1)));
+        result.setScope(processScope(e.element("Scope")));
         return result;
     }
 
@@ -243,6 +248,12 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Scope processScope(Element e) {
+        Scope result = new Scope(e);
+        result.setFormula(processFormula(e.elements().get(0)));
+        return result;
+    }
+
     private SectionPragma processSection(Element e) {
         SectionPragma result = new SectionPragma(e);
         return result;
@@ -314,7 +325,7 @@ public class ESX_Processor extends XMLApplication {
         UniversalQuantifierFormula result = new UniversalQuantifierFormula(e);
         result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
         result.setRestriction(processRestriction(e.element("Restriction")));
-        result.setScope(processFormula(e.elements().get(e.elements().size()-1)));
+        result.setScope(processScope(e.element("Scope")));
         return result;
     }
 
@@ -354,9 +365,31 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    /* BLOCKS */
+
+    private DefinitionalBlock processDefinitionalBlock(Element e) {
+        DefinitionalBlock result = new DefinitionalBlock(e);
+        return result;
+    }
+    
+    private Block processBlock(Element e) {
+        Block result = null;
+        switch (e.attributeValue("kind")) {
+            case "Definitional-Block":
+                result = processDefinitionalBlock(e);
+                break;
+            default:
+                Errors.error(e,"UNKNOWN Block");
+        }
+        return result;
+    }
+
     private Item processItem(Element e) {
         Item result = null;
         switch (e.getName()) {
+            case "Definition-Item":
+                result = processDefinitionItem(e);
+                break;
             case "Pragma":
                 result = processPragma(e);
                 break;
@@ -387,6 +420,7 @@ public class ESX_Processor extends XMLApplication {
                 processItem(e.elements().get(0));
                 break;
             case "Block":
+                BlocksItems.addBlock(processBlock(e));
                 break;
 //            default:
 //                Errors.error(e, "Missing Element in preProcess");
@@ -413,6 +447,7 @@ public class ESX_Processor extends XMLApplication {
             case "Item":
                 break;
             case "Block":
+                BlocksItems.removeLastBlock();
                 break;
         }
     }

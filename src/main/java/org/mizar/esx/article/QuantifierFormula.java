@@ -12,7 +12,7 @@ import org.mizar.esx.*;
 public class QuantifierFormula extends EsxElement implements FormulaInterface {
 
     private VariableSegments variableSegments;
-    private FormulaInterface scope;
+    private Scope scope;
 
     public QuantifierFormula(Element element) {
         super(element);
