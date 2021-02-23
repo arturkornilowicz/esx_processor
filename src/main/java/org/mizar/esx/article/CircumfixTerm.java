@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class CircumfixTerm extends EsxElement {
+public class CircumfixTerm extends EsxElement implements TermInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -22,6 +22,9 @@ public class CircumfixTerm extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private RightCircumflexSymbol rightCircumflexSymbol;
+    private Arguments arguments;
 
     public CircumfixTerm(Element element) {
         super(element);
@@ -40,6 +43,6 @@ public class CircumfixTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + arguments + rightCircumflexSymbol;
     }
 }

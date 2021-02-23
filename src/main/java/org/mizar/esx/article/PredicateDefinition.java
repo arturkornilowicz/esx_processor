@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PredicateDefinition extends EsxElement {
+public class PredicateDefinition extends Item {
 
     private String MMLId;
+
+    private Redefine redefine;
+    private PredicatePattern pattern;
+    private Definiens definiens;
 
     public PredicateDefinition(Element element) {
         super(element);
@@ -20,6 +24,6 @@ public class PredicateDefinition extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return redefine + " " + pattern + "\n" + definiens;
     }
 }

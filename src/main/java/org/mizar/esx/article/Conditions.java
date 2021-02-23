@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Conditions extends EsxElement {
 
+    private ArrayList<Proposition> propositions = new ArrayList<>();
+
     public Conditions(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "that " + propositions.toString();
     }
 }

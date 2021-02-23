@@ -9,7 +9,9 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class LociDeclaration extends EsxElement {
+public class LociDeclaration extends Item {
+
+    QualifiedSegments qualifiedSegments;
 
     public LociDeclaration(Element element) {
         super(element);
@@ -17,6 +19,6 @@ public class LociDeclaration extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "let " + qualifiedSegments.toString();
     }
 }

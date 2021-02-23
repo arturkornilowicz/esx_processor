@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Correctness extends EsxElement {
+public class Correctness extends Item {
+
+    private CorrectnessConditions correctnessConditions;
+    private JustificationInterface justification;
 
     public Correctness(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class Correctness extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return correctnessConditions + " " + justification;
     }
 }

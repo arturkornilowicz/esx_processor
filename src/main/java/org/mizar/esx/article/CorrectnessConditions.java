@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class CorrectnessConditions extends EsxElement {
 
+    private ArrayList<CorrectnessConditionInterface> correctnessConditions = new ArrayList<>();
+
     public CorrectnessConditions(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "correctness";
     }
 }

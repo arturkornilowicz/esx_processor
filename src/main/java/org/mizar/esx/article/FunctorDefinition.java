@@ -9,9 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class FunctorDefinition extends EsxElement {
+public class FunctorDefinition extends Item {
 
     private String MMLId;
+
+    private Redefine redefine;
+    private PatternInterface pattern;
+    private TypeSpecification typeSpecification;
+    private Definiens definiens;
 
     public FunctorDefinition(Element element) {
         super(element);
@@ -20,6 +25,6 @@ public class FunctorDefinition extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return redefine + " " + pattern + " " + typeSpecification + "\n" + definiens;
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Existence extends EsxElement {
+public class Existence extends EsxElement implements CorrectnessConditionInterface {
 
     public Existence(Element element) {
         super(element);
@@ -17,6 +17,6 @@ public class Existence extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "existence";
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Reducibility extends EsxElement {
+public class Reducibility extends EsxElement implements CorrectnessConditionInterface {
 
     public Reducibility(Element element) {
         super(element);
@@ -17,6 +17,6 @@ public class Reducibility extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "reducibility";
     }
 }

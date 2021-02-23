@@ -26,6 +26,6 @@ public class RightCircumflexSymbol extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

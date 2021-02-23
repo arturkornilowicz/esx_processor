@@ -9,9 +9,11 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SingleAssumption extends EsxElement {
+public class SingleAssumption extends EsxElement implements AssumptionInterface {
 
     private String position;
+
+    private Proposition proposition;
 
     public SingleAssumption(Element element) {
         super(element);
@@ -20,6 +22,6 @@ public class SingleAssumption extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return proposition.toString();
     }
 }

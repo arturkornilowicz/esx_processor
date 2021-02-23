@@ -9,14 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Uniqueness extends EsxElement implements CorrectnessConditionInterface {
+public class DefiniensEquals extends Definiens {
 
-    public Uniqueness(Element element) {
+    private TermInterface term;
+
+    public DefiniensEquals(Element element) {
         super(element);
     }
 
     @Override
-    public String toString() {
-        return "uniqueness";
-    }
+    public String toString() { return term.toString(); }
 }

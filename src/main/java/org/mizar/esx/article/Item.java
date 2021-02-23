@@ -26,6 +26,6 @@ public class Item extends EsxElement {
 
     @Override
     public String toString() {
-        return getElement().getName() + (block != null ? block : "");
+        return getElement().getName() + (block != null ? "\n" + block : "");
     }
 }

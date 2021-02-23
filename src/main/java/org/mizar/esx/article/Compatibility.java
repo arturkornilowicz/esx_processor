@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Compatibility extends EsxElement {
+public class Compatibility extends EsxElement implements CorrectnessConditionInterface {
 
     public Compatibility(Element element) {
         super(element);
@@ -17,6 +17,6 @@ public class Compatibility extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "compatibility";
     }
 }

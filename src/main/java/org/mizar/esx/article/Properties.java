@@ -22,6 +22,6 @@ public class Properties extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return property;
     }
 }

@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class QualifiedSegments extends EsxElement {
 
+    private ArrayList<VariableSegmentInterface> qualifiedSegments = new ArrayList<>();
+
     public QualifiedSegments(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return qualifiedSegments.toString();
     }
 }

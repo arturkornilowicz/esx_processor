@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class TypeSpecification extends EsxElement {
 
+    private TypeInterface type;
+
     public TypeSpecification(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return type != null ? "-> " + type.toString() : "";
     }
 }

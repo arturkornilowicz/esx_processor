@@ -15,6 +15,8 @@ public class Definiens extends EsxElement {
     private String position;
     private String shape;
 
+    private Label label;
+
     public Definiens(Element element) {
         super(element);
         this.kind = Misc.assignAttrValue(element,"kind");
@@ -23,7 +25,5 @@ public class Definiens extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return label.toString(); }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Unknown extends EsxElement {
+public class Unknown extends EsxElement implements PragmaInterface {
 
     private String inscription;
     private String position;
@@ -22,6 +22,6 @@ public class Unknown extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "::$EOF";
     }
 }

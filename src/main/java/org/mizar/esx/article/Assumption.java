@@ -9,7 +9,9 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Assumption extends EsxElement {
+public class Assumption extends Item {
+
+    private AssumptionInterface assumption;
 
     public Assumption(Element element) {
         super(element);
@@ -17,6 +19,6 @@ public class Assumption extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "assume " + assumption.toString();
     }
 }

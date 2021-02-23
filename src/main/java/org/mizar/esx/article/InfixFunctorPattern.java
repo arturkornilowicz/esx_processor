@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class InfixFunctorPattern extends EsxElement {
+public class InfixFunctorPattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -25,6 +25,9 @@ public class InfixFunctorPattern extends EsxElement {
     private String position;
     private String rightargsbracketed;
     private String spelling;
+
+    private Loci leftLoci;
+    private Loci rightLoci;
 
     public InfixFunctorPattern(Element element) {
         super(element);
@@ -46,6 +49,6 @@ public class InfixFunctorPattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
     }
 }

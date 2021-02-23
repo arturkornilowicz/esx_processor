@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ItTerm extends EsxElement {
+public class ItTerm extends EsxElement implements TermInterface {
 
     private String position;
     private String sort;
@@ -22,6 +22,6 @@ public class ItTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "it";
     }
 }

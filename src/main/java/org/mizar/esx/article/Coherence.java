@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Coherence extends EsxElement {
+public class Coherence extends EsxElement implements CorrectnessConditionInterface {
 
     public Coherence(Element element) {
         super(element);
@@ -17,6 +17,6 @@ public class Coherence extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "coherence";
     }
 }

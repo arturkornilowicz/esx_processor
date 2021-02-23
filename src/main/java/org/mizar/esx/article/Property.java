@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Property extends EsxElement {
+public class Property extends Item {
+
+    private Properties properties;
+    private JustificationInterface justification;
 
     public Property(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class Property extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return properties + " " + justification;
     }
 }

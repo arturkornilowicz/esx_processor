@@ -32,6 +32,21 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Assumption processAssumption(Element e) {
+        Assumption result = new Assumption(e);
+        switch (e.getName()) {
+            case "Collective-Assumption":
+                result.setAssumption(processCollectiveAssumption(e));
+                break;
+            case "Single-Assumption":
+                result.setAssumption(processSingleAssumption(e));
+                break;
+            default:
+                Errors.error(e,"UNKNOWN Assumption");
+        }
+        return result;
+    }
+
     private Attribute processAttribute(Element e) {
         Attribute result = new Attribute(e);
         result.setArguments(processArguments(e.element("Arguments")));
@@ -56,11 +71,32 @@ public class ESX_Processor extends XMLApplication {
         return new Canceled(e);
     }
 
+    private CircumfixTerm processCircumfixTerm(Element e) {
+        CircumfixTerm result = new CircumfixTerm(e);
+        result.setRightCircumflexSymbol(processRightCircumflexSymbol(e.element("Right-Circumflex-Symbol")));
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
     private ClusteredType processClusteredType(Element e) {
         ClusteredType result = new ClusteredType(e);
         result.setAdjectiveCluster(processAdjectiveCluster(e.element("Adjective-Cluster")));
         result.setType(processType(e.elements().get(1)));
         return result;
+    }
+
+    private Coherence processCoherence(Element e) {
+        return new Coherence(e);
+    }
+
+    private CollectiveAssumption processCollectiveAssumption(Element e) {
+        CollectiveAssumption result = new CollectiveAssumption(e);
+        result.setConditions(processConditions(e.element("Conditions")));
+        return result;
+    }
+
+    private Compatibility processCompatibility(Element e) {
+        return new Compatibility(e);
     }
 
     private ConditionalFormula processConditionalFormula(Element e) {
@@ -70,10 +106,96 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Conditions processConditions(Element e) {
+        Conditions result = new Conditions(e);
+        for (Element element: e.elements())
+            result.getPropositions().add(processProposition(element));
+        return result;
+    }
+
     private ConjunctiveFormula processConjunctiveFormula(Element e) {
         ConjunctiveFormula result = new ConjunctiveFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
         result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private Correctness processCorrectness(Element e) {
+        Correctness result = new Correctness(e);
+        result.setCorrectnessConditions(processCorrectnessConditions(e.element("Correctness-Conditions")));
+        result.setJustification(processJustification(e.elements().get(1)));
+        return result;
+    }
+
+    private CorrectnessCondition processCorrectnessCondition(Element e) {
+        CorrectnessCondition result = new CorrectnessCondition(e);
+        Element eCondition = e.elements().get(0);
+        CorrectnessConditionInterface correctnessCondition = null;
+        switch (eCondition.getName()) {
+            case "coherence":
+                correctnessCondition = processCoherence(eCondition);
+                break;
+            case "compatibility":
+                correctnessCondition = processCompatibility(eCondition);
+                break;
+            case "existence":
+                correctnessCondition = processExistence(eCondition);
+                break;
+            case "reducibility":
+                correctnessCondition = processReducibility(eCondition);
+                break;
+            case "uniqueness":
+                correctnessCondition = processUniqueness(eCondition);
+                break;
+            default:
+                Errors.error(eCondition,"UNKNOWN Correctness Condition");
+        }
+        result.setCorrectnessCondition(correctnessCondition);
+        result.setJustification(processJustification(e.elements().get(1)));
+        return result;
+    }
+
+    private CorrectnessConditions processCorrectnessConditions(Element e) {
+        CorrectnessConditions result = new CorrectnessConditions(e);
+        for (Element element: e.elements())
+            switch (element.getName()) {
+                case "coherence":
+                    result.getCorrectnessConditions().add(processCoherence(element));
+                    break;
+                case "compatibility":
+                    result.getCorrectnessConditions().add(processCompatibility(element));
+                    break;
+                case "existence":
+                    result.getCorrectnessConditions().add(processExistence(element));
+                    break;
+                case "reducibility":
+                    result.getCorrectnessConditions().add(processReducibility(element));
+                    break;
+                case "uniqueness":
+                    result.getCorrectnessConditions().add(processUniqueness(element));
+                    break;
+                default:
+                    Errors.error(e,"UNKNOWN Correctness");
+            }
+        return result;
+    }
+
+    private Definiens processDefiniens(Element e) {
+        if (e == null)
+            return null;
+        Definiens result = null;
+        switch (e.attributeValue("shape")) {
+            case "Formula-Expression":
+                result = new DefiniensMeans(e);
+                ((DefiniensMeans)result).setFormula(processFormula(e.elements().get(1)));
+                break;
+            case "Term-Expression":
+                result = new DefiniensEquals(e);
+                ((DefiniensEquals)result).setTerm(processTerm(e.elements().get(1)));
+                break;
+            default:
+                Errors.error(e, "UNKNOWN Definiens");
+        }
         return result;
     }
 
@@ -87,6 +209,10 @@ public class ESX_Processor extends XMLApplication {
         result.setArg1(processFormula(e.elements().get(0)));
         result.setArg2(processFormula(e.elements().get(1)));
         return result;
+    }
+
+    private Existence processExistence(Element e) {
+        return new Existence(e);
     }
 
     private ExistentialQuantifierFormula processExistentialQuantifierFormula(Element e) {
@@ -146,6 +272,15 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private FunctorDefinition processFunctorDefinition(Element e) {
+        FunctorDefinition result = new FunctorDefinition(e);
+        result.setRedefine(processRedefine(e.element("Redefine")));
+        result.setPattern(processPattern(e.elements().get(1)));
+        result.setTypeSpecification(processTypeSpecification(e.element("Type-Specification")));
+        result.setDefiniens(processDefiniens(e.element("Definiens")));
+        return result;
+    }
+
     private ImplicitlyQualifiedSegment processImplicitlyQualifiedSegment(Element e) {
         ImplicitlyQualifiedSegment result = new ImplicitlyQualifiedSegment();
         result.setVariable(processVariable(e.element("Variable")));
@@ -159,6 +294,10 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private ItTerm processItTerm(Element e) {
+        return new ItTerm(e);
+    }
+
     private JustificationInterface processJustification(Element e) {
         JustificationInterface result = null;
         return result;
@@ -167,6 +306,24 @@ public class ESX_Processor extends XMLApplication {
     private Label processLabel(Element e) {
         Label result = new Label(e);
         return result;
+    }
+
+    private Loci processLoci(Element e) {
+        Loci result = new Loci(e);
+        for (Element element: e.elements()) {
+            result.getLoci().add(processLocus(element));
+        }
+        return result;
+    }
+
+    private LociDeclaration processLociDeclaration(Element e) {
+        LociDeclaration result = new LociDeclaration(e);
+        result.setQualifiedSegments(processQualifiedSegments(e.element("Qualified-Segments")));
+        return result;
+    }
+
+    private Locus processLocus(Element e) {
+        return new Locus(e);
     }
 
     private NegatedFormula processNegatedFormula(Element e) {
@@ -183,6 +340,25 @@ public class ESX_Processor extends XMLApplication {
         return new NumeralTerm(e);
     }
 
+    private PatternInterface processPattern(Element e) {
+        PatternInterface result = null;
+        switch (e.getName()) {
+            case "CircumfixFunctor-Pattern":
+                result = new CircumfixFunctorPattern(e);
+                ((CircumfixFunctorPattern)result).setRightCircumflexSymbol(processRightCircumflexSymbol(e.element("Right-Circumflex-Symbol")));
+                ((CircumfixFunctorPattern)result).setLoci(processLoci(e.element("Loci")));
+                break;
+            case "InfixFunctor-Pattern":
+                result = new InfixFunctorPattern(e);
+                ((InfixFunctorPattern)result).setLeftLoci(processLoci(e.elements().get(0)));
+                ((InfixFunctorPattern)result).setRightLoci(processLoci(e.elements().get(1)));
+                break;
+            default:
+                Errors.error(e,"UNKNOWN Pattern");
+        }
+        return result;
+    }
+
     private Pragma processPragma(Element e) {
         Pragma result = new Pragma(e);
         switch (e.elements().get(0).getName()) {
@@ -192,9 +368,38 @@ public class ESX_Processor extends XMLApplication {
             case "Notion-Name":
                 result.setPragma(processNotionName(e.elements().get(0)));
                 break;
+            case "Unknown":
+                result.setPragma(processUnknown(e.elements().get(0)));
+                break;
             default:
                 Errors.error(e,"UNKNOWN PRAGMA");
         }
+        return result;
+    }
+
+    private PredicateDefinition processPredicateDefinition(Element e) {
+        PredicateDefinition result = new PredicateDefinition(e);
+        result.setRedefine(processRedefine(e.element("Redefine")));
+        result.setPattern(processPredicatePattern(e.elements().get(1)));
+        result.setDefiniens(processDefiniens(e.element("Definiens")));
+        return result;
+    }
+
+    private PredicatePattern processPredicatePattern(Element e) {
+        PredicatePattern result = new PredicatePattern(e);
+        result.setLeftLoci(processLoci(e.elements().get(0)));
+        result.setRightLoci(processLoci(e.elements().get(1)));
+        return result;
+    }
+
+    private Properties processProperties(Element e) {
+        return new Properties(e);
+    }
+
+    private Property processProperty(Element e) {
+        Property result = new Property(e);
+        result.setProperties(processProperties(e.element("Properties")));
+        result.setJustification(processJustification(e.elements().get(1)));
         return result;
     }
 
@@ -205,11 +410,26 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private QualifiedSegments processQualifiedSegments(Element e) {
+        QualifiedSegments result = new QualifiedSegments(e);
+        for (Element element : e.elements())
+            result.getQualifiedSegments().add(processVariableSegment(element));
+        return result;
+    }
+
     private QualifyingFormula processQualifyingFormula(Element e) {
         QualifyingFormula result = new QualifyingFormula(e);
         result.setTerm(processTerm(e.elements().get(0)));
         result.setType(processType(e.elements().get(1)));
         return result;
+    }
+
+    private Redefine processRedefine(Element e) {
+        return new Redefine(e);
+    }
+
+    private Reducibility processReducibility(Element e) {
+        return new Reducibility(e);
     }
 
     private RelationFormula processRelationFormula(Element e) {
@@ -248,6 +468,10 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private RightCircumflexSymbol processRightCircumflexSymbol(Element e) {
+        return new RightCircumflexSymbol(e);
+    }
+
     private Scope processScope(Element e) {
         Scope result = new Scope(e);
         result.setFormula(processFormula(e.elements().get(0)));
@@ -263,6 +487,12 @@ public class ESX_Processor extends XMLApplication {
         return new SimpleTerm(e);
     }
 
+    private SingleAssumption processSingleAssumption(Element e) {
+        SingleAssumption result = new SingleAssumption(e);
+        result.setProposition(processProposition(e.element("Proposition")));
+        return result;
+    }
+
     private StandardType processStandardType(Element e) {
         StandardType result = new StandardType(e);
         return result;
@@ -276,8 +506,14 @@ public class ESX_Processor extends XMLApplication {
     private TermInterface processTerm(Element e) {
         TermInterface result = null;
         switch (e.getName()) {
+            case "Circumfix-Term":
+                result = processCircumfixTerm(e);
+                break;
             case "Infix-Term":
                 result = processInfixTerm(e);
+                break;
+            case "it-Term":
+                result = processItTerm(e);
                 break;
             case "Numeral-Term":
                 result = processNumeralTerm(e);
@@ -321,12 +557,27 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private TypeSpecification processTypeSpecification(Element e) {
+        TypeSpecification result = new TypeSpecification(e);
+        if (e != null)
+            result.setType(processType(e.elements().get(0)));
+        return result;
+    }
+
+    private Uniqueness processUniqueness(Element e) {
+        return new Uniqueness(e);
+    }
+
     private UniversalQuantifierFormula processUniversalQuantifierFormula(Element e) {
         UniversalQuantifierFormula result = new UniversalQuantifierFormula(e);
         result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
         result.setRestriction(processRestriction(e.element("Restriction")));
         result.setScope(processScope(e.element("Scope")));
         return result;
+    }
+
+    private Unknown processUnknown(Element e) {
+        return new Unknown(e);
     }
 
     private Variable processVariable(Element e) {
@@ -371,7 +622,7 @@ public class ESX_Processor extends XMLApplication {
         DefinitionalBlock result = new DefinitionalBlock(e);
         return result;
     }
-    
+
     private Block processBlock(Element e) {
         Block result = null;
         switch (e.attributeValue("kind")) {
@@ -381,17 +632,39 @@ public class ESX_Processor extends XMLApplication {
             default:
                 Errors.error(e,"UNKNOWN Block");
         }
+        BlocksItems.lastItem().setBlock(result);
         return result;
     }
 
     private Item processItem(Element e) {
         Item result = null;
         switch (e.getName()) {
+            case "Assumption":
+                result = processAssumption(e.elements().get(0));
+                break;
+            case "Correctness":
+                result = processCorrectness(e);
+                break;
+            case "Correctness-Condition":
+                result = processCorrectnessCondition(e);
+                break;
             case "Definition-Item":
                 result = processDefinitionItem(e);
                 break;
+            case "Functor-Definition":
+                result = processFunctorDefinition(e);
+                break;
+            case "Loci-Declaration":
+                result = processLociDeclaration(e);
+                break;
             case "Pragma":
                 result = processPragma(e);
+                break;
+            case "Predicate-Definition":
+                result = processPredicateDefinition(e);
+                break;
+            case "Property":
+                result = processProperty(e);
                 break;
             case "Reservation":
                 result = processReservation(e);

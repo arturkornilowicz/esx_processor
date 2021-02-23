@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class CircumfixFunctorPattern extends EsxElement {
+public class CircumfixFunctorPattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -23,6 +23,9 @@ public class CircumfixFunctorPattern extends EsxElement {
     private String patternnr;
     private String position;
     private String spelling;
+
+    private RightCircumflexSymbol rightCircumflexSymbol;
+    private Loci loci;
 
     public CircumfixFunctorPattern(Element element) {
         super(element);
@@ -42,6 +45,6 @@ public class CircumfixFunctorPattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + loci + rightCircumflexSymbol;
     }
 }

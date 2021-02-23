@@ -24,6 +24,9 @@ public class PredicatePattern extends EsxElement {
     private String position;
     private String spelling;
 
+    private Loci leftLoci;
+    private Loci rightLoci;
+
     public PredicatePattern(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -42,6 +45,6 @@ public class PredicatePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
     }
 }

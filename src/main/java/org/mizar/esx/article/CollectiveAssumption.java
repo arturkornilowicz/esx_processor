@@ -9,9 +9,11 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class CollectiveAssumption extends EsxElement {
+public class CollectiveAssumption extends EsxElement implements AssumptionInterface {
 
     private String position;
+
+    private Conditions conditions;
 
     public CollectiveAssumption(Element element) {
         super(element);
@@ -20,6 +22,6 @@ public class CollectiveAssumption extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return conditions.toString();
     }
 }
