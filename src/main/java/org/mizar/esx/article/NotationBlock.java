@@ -9,16 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class LociEqualities extends EsxElement {
+public class NotationBlock extends Block {
 
-    ArrayList<LociEquality> lociEqualities = new ArrayList<>();
-
-    public LociEqualities(Element element) {
+    public NotationBlock(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return lociEqualities.size() > 0 ? "when " + lociEqualities : "";
+        return super.toString();
     }
 }

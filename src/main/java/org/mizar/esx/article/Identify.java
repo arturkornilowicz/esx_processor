@@ -9,7 +9,11 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Identify extends EsxElement {
+public class Identify extends Item {
+
+    private PatternShapedExpression leftPatternShapedExpression;
+    private PatternShapedExpression rightPatternShapedExpression;
+    private LociEqualities lociEqualities;
 
     public Identify(Element element) {
         super(element);
@@ -17,6 +21,6 @@ public class Identify extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "identify " + leftPatternShapedExpression + " with " + rightPatternShapedExpression + " " + lociEqualities;
     }
 }

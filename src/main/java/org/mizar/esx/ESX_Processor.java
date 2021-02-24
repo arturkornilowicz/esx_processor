@@ -47,6 +47,20 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private AttrAntonym processAttrAntonym(Element e) {
+        AttrAntonym result = new AttrAntonym(e);
+        result.setAntonym(processPattern(e.element("Attribute-Pattern")));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
+        return result;
+    }
+
+    private AttrSynonym processAttrSynonym(Element e) {
+        AttrSynonym result = new AttrSynonym(e);
+        result.setSynonym(processPattern(e.element("Attribute-Pattern")));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
+        return result;
+    }
+
     private Attribute processAttribute(Element e) {
         Attribute result = new Attribute(e);
         result.setArguments(processArguments(e.element("Arguments")));
@@ -56,15 +70,8 @@ public class ESX_Processor extends XMLApplication {
     private AttributeDefinition processAttributeDefinition(Element e) {
         AttributeDefinition result = new AttributeDefinition(e);
         result.setRedefine(processRedefine(e.element("Redefine")));
-        result.setPattern(processAttributePattern(e.elements().get(1)));
+        result.setPattern(processPattern(e.elements().get(1)));
         result.setDefiniens(processDefiniens(e.element("Definiens")));
-        return result;
-    }
-
-    private AttributePattern processAttributePattern(Element e) {
-        AttributePattern result = new AttributePattern(e);
-        result.setSubject(processLocus(e.elements().get(0)));
-        result.setArguments(processLoci(e.elements().get(1)));
         return result;
     }
 
@@ -362,6 +369,13 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private FuncSynonym processFuncSynonym(Element e) {
+        FuncSynonym result = new FuncSynonym(e);
+        result.setSynonym(processPattern(e.elements().get(0)));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
+        return result;
+    }
+
     private FunctorDefinition processFunctorDefinition(Element e) {
         FunctorDefinition result = new FunctorDefinition(e);
         result.setRedefine(processRedefine(e.element("Redefine")));
@@ -377,6 +391,14 @@ public class ESX_Processor extends XMLApplication {
         result.setAdjectiveCluster(processAdjectiveCluster(e.elements().get(1)));
         if (e.elements().size() > 2)
            result.setType(processType(e.elements().get(2)));
+        return result;
+    }
+
+    private Identify processIdentify(Element e) {
+        Identify result = new Identify(e);
+        result.setLeftPatternShapedExpression(processPatternShapedExpression(e.elements().get(1)));
+        result.setRightPatternShapedExpression(processPatternShapedExpression(e.elements().get(0)));
+        result.setLociEqualities(processLociEqualities(e.element("Loci-Equalities")));
         return result;
     }
 
@@ -421,6 +443,20 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private LociEqualities processLociEqualities(Element e) {
+        LociEqualities result = new LociEqualities(e);
+        for (Element element: e.elements())
+            result.getLociEqualities().add(processLociEquality(element));
+        return result;
+    }
+
+    private LociEquality processLociEquality(Element e) {
+        LociEquality result = new LociEquality(e);
+        result.setLocus_1(processLocus(e.elements().get(0)));
+        result.setLocus_2(processLocus(e.elements().get(1)));
+        return result;
+    }
+
     private Locus processLocus(Element e) {
         return new Locus(e);
     }
@@ -428,7 +464,7 @@ public class ESX_Processor extends XMLApplication {
     private ModeDefinition processModeDefinition(Element e) {
         ModeDefinition result = new ModeDefinition(e);
         result.setRedefine(processRedefine(e.element("Redefine")));
-        result.setPattern(processModePattern(e.elements().get(1)));
+        result.setPattern(processPattern(e.elements().get(1)));
         result.setModeDescription(processModeDescription(e.elements().get(2)));
         return result;
     }
@@ -448,9 +484,10 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
-    private ModePattern processModePattern(Element e) {
-        ModePattern result = new ModePattern(e);
-        result.setLoci(processLoci(e.element("Loci")));
+    private ModeSynonym processModeSynonym(Element e) {
+        ModeSynonym result = new ModeSynonym(e);
+        result.setSynonym(processPattern(e.element("Mode-Pattern")));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
         return result;
     }
 
@@ -522,6 +559,11 @@ public class ESX_Processor extends XMLApplication {
     private PatternInterface processPattern(Element e) {
         PatternInterface result = null;
         switch (e.getName()) {
+            case "Attribute-Pattern":
+                result = new AttributePattern(e);
+                ((AttributePattern)result).setSubject(processLocus(e.elements().get(0)));
+                ((AttributePattern)result).setArguments(processLoci(e.elements().get(1)));
+                break;
             case "CircumfixFunctor-Pattern":
                 result = new CircumfixFunctorPattern(e);
                 ((CircumfixFunctorPattern)result).setRightCircumflexSymbol(processRightCircumflexSymbol(e.element("Right-Circumflex-Symbol")));
@@ -532,9 +574,24 @@ public class ESX_Processor extends XMLApplication {
                 ((InfixFunctorPattern)result).setLeftLoci(processLoci(e.elements().get(0)));
                 ((InfixFunctorPattern)result).setRightLoci(processLoci(e.elements().get(1)));
                 break;
+            case "Mode-Pattern":
+                result = new ModePattern(e);
+                ((ModePattern)result).setLoci(processLoci(e.element("Loci")));
+                break;
+            case "Predicate-Pattern":
+                result = new PredicatePattern(e);
+                ((PredicatePattern)result).setLeftLoci(processLoci(e.elements().get(0)));
+                ((PredicatePattern)result).setRightLoci(processLoci(e.elements().get(1)));
+                break;
             default:
                 Errors.error(e,"UNKNOWN Pattern");
         }
+        return result;
+    }
+
+    private PatternShapedExpression processPatternShapedExpression(Element e) {
+        PatternShapedExpression result = new PatternShapedExpression(e);
+        result.setPattern(processPattern(e.elements().get(0)));
         return result;
     }
 
@@ -556,18 +613,25 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
-    private PredicateDefinition processPredicateDefinition(Element e) {
-        PredicateDefinition result = new PredicateDefinition(e);
-        result.setRedefine(processRedefine(e.element("Redefine")));
-        result.setPattern(processPredicatePattern(e.elements().get(1)));
-        result.setDefiniens(processDefiniens(e.element("Definiens")));
+    private PredAntonym processPredAntonym(Element e) {
+        PredAntonym result = new PredAntonym(e);
+        result.setAntonym(processPattern(e.element("Predicate-Pattern")));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
         return result;
     }
 
-    private PredicatePattern processPredicatePattern(Element e) {
-        PredicatePattern result = new PredicatePattern(e);
-        result.setLeftLoci(processLoci(e.elements().get(0)));
-        result.setRightLoci(processLoci(e.elements().get(1)));
+    private PredSynonym processPredSynonym(Element e) {
+        PredSynonym result = new PredSynonym(e);
+        result.setSynonym(processPattern(e.element("Predicate-Pattern")));
+        result.setOriginal(processPatternShapedExpression(e.element("Pattern-Shaped-Expression")));
+        return result;
+    }
+
+    private PredicateDefinition processPredicateDefinition(Element e) {
+        PredicateDefinition result = new PredicateDefinition(e);
+        result.setRedefine(processRedefine(e.element("Redefine")));
+        result.setPattern(processPattern(e.elements().get(1)));
+        result.setDefiniens(processDefiniens(e.element("Definiens")));
         return result;
     }
 
@@ -817,6 +881,11 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private NotationBlock processNotationBlock(Element e) {
+        NotationBlock result = new NotationBlock(e);
+        return result;
+    }
+
     private RegistrationBlock processRegistrationBlock(Element e) {
         RegistrationBlock result = new RegistrationBlock(e);
         return result;
@@ -827,6 +896,9 @@ public class ESX_Processor extends XMLApplication {
         switch (e.attributeValue("kind")) {
             case "Definitional-Block":
                 result = processDefinitionalBlock(e);
+                break;
+            case "Notation-Block":
+                result = processNotationBlock(e);
                 break;
             case "Registration-Block":
                 result = processRegistrationBlock(e);
@@ -844,6 +916,12 @@ public class ESX_Processor extends XMLApplication {
             case "Assumption":
                 result = processAssumption(e.elements().get(0));
                 break;
+            case "Attr-Antonym":
+                result = processAttrAntonym(e);
+                break;
+            case "Attr-Synonym":
+                result = processAttrSynonym(e);
+                break;
             case "Attribute-Definition":
                 result = processAttributeDefinition(e);
                 break;
@@ -859,17 +937,32 @@ public class ESX_Processor extends XMLApplication {
             case "Definition-Item":
                 result = processDefinitionItem(e);
                 break;
+            case "Func-Synonym":
+                result = processFuncSynonym(e);
+                break;
             case "Functor-Definition":
                 result = processFunctorDefinition(e);
                 break;
+            case "Identify":
+                result = processIdentify(e);
+                break;
             case "Mode-Definition":
                 result = processModeDefinition(e);
+                break;
+            case "Mode-Synonym":
+                result = processModeSynonym(e);
                 break;
             case "Loci-Declaration":
                 result = processLociDeclaration(e);
                 break;
             case "Pragma":
                 result = processPragma(e);
+                break;
+            case "Pred-Antonym":
+                result = processPredAntonym(e);
+                break;
+            case "Pred-Synonym":
+                result = processPredSynonym(e);
                 break;
             case "Predicate-Definition":
                 result = processPredicateDefinition(e);

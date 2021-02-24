@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PredAntonym extends EsxElement {
+public class PredAntonym extends Item {
+
+    private PatternInterface antonym;
+    private PatternShapedExpression original;
 
     public PredAntonym(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class PredAntonym extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "antonym " + antonym + " for " + original;
     }
 }

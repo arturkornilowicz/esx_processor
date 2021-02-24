@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class PatternShapedExpression extends EsxElement {
 
+    private PatternInterface pattern;
+
     public PatternShapedExpression(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return pattern.toString();
     }
 }

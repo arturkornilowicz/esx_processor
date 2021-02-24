@@ -25,6 +25,6 @@ public class FunctorDefinition extends Item {
 
     @Override
     public String toString() {
-        return redefine + " " + pattern + " " + typeSpecification + "\n" + definiens;
+        return redefine + "func " + pattern + " " + typeSpecification + "\n" + definiens;
     }
 }

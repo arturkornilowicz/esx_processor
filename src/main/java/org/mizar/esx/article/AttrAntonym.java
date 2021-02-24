@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class AttrAntonym extends EsxElement {
+public class AttrAntonym extends Item {
+
+    private PatternInterface antonym;
+    private PatternShapedExpression original;
 
     public AttrAntonym(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class AttrAntonym extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "antonym " + antonym + " for " + original;
     }
 }

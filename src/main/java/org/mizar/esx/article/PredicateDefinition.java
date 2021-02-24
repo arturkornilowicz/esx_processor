@@ -14,7 +14,7 @@ public class PredicateDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private PredicatePattern pattern;
+    private PatternInterface pattern;
     private Definiens definiens;
 
     public PredicateDefinition(Element element) {
@@ -24,6 +24,6 @@ public class PredicateDefinition extends Item {
 
     @Override
     public String toString() {
-        return redefine + " " + pattern + "\n" + definiens;
+        return redefine + "pred " + pattern + "\n" + definiens;
     }
 }

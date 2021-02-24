@@ -14,7 +14,7 @@ public class ModeDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private ModePattern pattern;
+    private PatternInterface pattern;
     private ModeDescriptionInterface modeDescription;
 
     public ModeDefinition(Element element) {
@@ -23,5 +23,5 @@ public class ModeDefinition extends Item {
     }
 
     @Override
-    public String toString() { return redefine + " " + pattern + " " + modeDescription; }
+    public String toString() { return redefine + "mode " + pattern + " " + modeDescription; }
 }

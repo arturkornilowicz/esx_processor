@@ -14,7 +14,7 @@ public class AttributeDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private AttributePattern pattern;
+    private PatternInterface pattern;
     private Definiens definiens;
 
     public AttributeDefinition(Element element) {
@@ -24,6 +24,6 @@ public class AttributeDefinition extends Item {
 
     @Override
     public String toString() {
-        return redefine + " " + pattern + "\n" + definiens;
+        return redefine + "attr " + pattern + "\n" + definiens;
     }
 }

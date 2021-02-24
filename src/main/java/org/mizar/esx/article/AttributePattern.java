@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class AttributePattern extends EsxElement {
+public class AttributePattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -47,6 +47,6 @@ public class AttributePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return "attr " + subject + " is " + arguments + spelling;
+        return subject + " is " + arguments + spelling;
     }
 }

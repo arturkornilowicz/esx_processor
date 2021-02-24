@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PredicatePattern extends EsxElement {
+public class PredicatePattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -45,6 +45,6 @@ public class PredicatePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return "pred " + "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
+        return "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
     }
 }

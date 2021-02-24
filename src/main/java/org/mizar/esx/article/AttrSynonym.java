@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class AttrSynonym extends EsxElement {
+public class AttrSynonym extends Item {
+
+    private PatternInterface synonym;
+    private PatternShapedExpression original;
 
     public AttrSynonym(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class AttrSynonym extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "synonym " + synonym + " for " + original;
     }
 }

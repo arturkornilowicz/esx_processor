@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ModePattern extends EsxElement {
+public class ModePattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absoluteorigconstrMMLId;
@@ -44,6 +44,6 @@ public class ModePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return "mode " + spelling + " of " + loci;
+        return spelling + " of " + loci;
     }
 }
