@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class FunctorialRegistration extends EsxElement {
+public class FunctorialRegistration extends EsxElement implements ClusterRegistrationInterface {
 
     private String position;
+
+    private TermInterface term;
+    private AdjectiveCluster adjectiveCluster;
+    private TypeInterface type;
 
     public FunctorialRegistration(Element element) {
         super(element);
@@ -20,6 +24,6 @@ public class FunctorialRegistration extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "cluster " + term + " -> " + adjectiveCluster + (type != null ? " for " + type : "");
     }
 }

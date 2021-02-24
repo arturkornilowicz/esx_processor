@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ModeDefinition extends EsxElement {
+public class ModeDefinition extends Item {
 
     private String MMLId;
+
+    private Redefine redefine;
+    private ModePattern pattern;
+    private ModeDescriptionInterface modeDescription;
 
     public ModeDefinition(Element element) {
         super(element);
@@ -19,7 +23,5 @@ public class ModeDefinition extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return redefine + " " + pattern + " " + modeDescription; }
 }

@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ConditionalRegistration extends EsxElement {
+public class ConditionalRegistration extends EsxElement implements ClusterRegistrationInterface {
 
     private String position;
+
+    private AdjectiveCluster predecessor;
+    private AdjectiveCluster successor;
+    private TypeInterface type;
 
     public ConditionalRegistration(Element element) {
         super(element);
@@ -20,6 +24,6 @@ public class ConditionalRegistration extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "cluster " + predecessor + " -> " + successor + " for " + type;
     }
 }

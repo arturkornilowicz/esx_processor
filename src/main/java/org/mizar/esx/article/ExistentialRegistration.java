@@ -9,9 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ExistentialRegistration extends EsxElement {
+public class ExistentialRegistration extends EsxElement implements ClusterRegistrationInterface {
 
     private String position;
+
+    private AdjectiveCluster adjectiveCluster;
+    private TypeInterface type;
 
     public ExistentialRegistration(Element element) {
         super(element);
@@ -20,6 +23,6 @@ public class ExistentialRegistration extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "cluster " + adjectiveCluster + " for " + type;
     }
 }

@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StandardMode extends EsxElement {
+public class StandardMode extends EsxElement implements ModeDescriptionInterface {
+
+    private TypeSpecification typeSpecification;
+    private Definiens definiens;
 
     public StandardMode(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class StandardMode extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return typeSpecification + "\n" + definiens;
     }
 }

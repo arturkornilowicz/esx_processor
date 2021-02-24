@@ -9,16 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ExpandableMode extends EsxElement implements ModeDescriptionInterface {
+public class RegistrationBlock extends Block {
 
-    private TypeInterface type;
-
-    public ExpandableMode(Element element) {
+    public RegistrationBlock(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return "is " + type;
+        return super.toString();
     }
 }

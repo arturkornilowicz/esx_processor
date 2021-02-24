@@ -49,6 +49,6 @@ public class InfixFunctorPattern extends EsxElement implements PatternInterface 
 
     @Override
     public String toString() {
-        return "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
+        return "func " + "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
     }
 }

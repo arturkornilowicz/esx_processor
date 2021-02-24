@@ -53,6 +53,21 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private AttributeDefinition processAttributeDefinition(Element e) {
+        AttributeDefinition result = new AttributeDefinition(e);
+        result.setRedefine(processRedefine(e.element("Redefine")));
+        result.setPattern(processAttributePattern(e.elements().get(1)));
+        result.setDefiniens(processDefiniens(e.element("Definiens")));
+        return result;
+    }
+
+    private AttributePattern processAttributePattern(Element e) {
+        AttributePattern result = new AttributePattern(e);
+        result.setSubject(processLocus(e.elements().get(0)));
+        result.setArguments(processLoci(e.elements().get(1)));
+        return result;
+    }
+
     private BiconditionalFormula processBiconditionalFormula(Element e) {
         BiconditionalFormula result = new BiconditionalFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
@@ -75,6 +90,25 @@ public class ESX_Processor extends XMLApplication {
         CircumfixTerm result = new CircumfixTerm(e);
         result.setRightCircumflexSymbol(processRightCircumflexSymbol(e.element("Right-Circumflex-Symbol")));
         result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
+    private Cluster processCluster(Element e) {
+        Cluster result = new Cluster(e);
+        Element element = e.elements().get(0);
+        switch (element.getName()) {
+            case "Conditional-Registration":
+                result.setCluster(processConditionalRegistration(element));
+                break;
+            case "Existential-Registration":
+                result.setCluster(processExistentialRegistration(element));
+                break;
+            case "Functorial-Registration":
+                result.setCluster(processFunctorialRegistration(element));
+                break;
+            default:
+                Errors.error(element,"UNKNOWN Cluster Registration");
+        }
         return result;
     }
 
@@ -103,6 +137,14 @@ public class ESX_Processor extends XMLApplication {
         ConditionalFormula result = new ConditionalFormula(e);
         result.setArg1(processFormula(e.elements().get(0)));
         result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private ConditionalRegistration processConditionalRegistration(Element e) {
+        ConditionalRegistration result = new ConditionalRegistration(e);
+        result.setPredecessor(processAdjectiveCluster(e.elements().get(0)));
+        result.setSuccessor(processAdjectiveCluster(e.elements().get(1)));
+        result.setType(processType(e.elements().get(2)));
         return result;
     }
 
@@ -171,6 +213,9 @@ public class ESX_Processor extends XMLApplication {
                     break;
                 case "compatibility":
                     result.getCorrectnessConditions().add(processCompatibility(element));
+                    break;
+                case "consistency":
+                    result.getCorrectnessConditions().add(processConsistency(element));
                     break;
                 case "existence":
                     result.getCorrectnessConditions().add(processExistence(element));
@@ -258,6 +303,19 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private ExistentialRegistration processExistentialRegistration(Element e) {
+        ExistentialRegistration result = new ExistentialRegistration(e);
+        result.setAdjectiveCluster(processAdjectiveCluster(e.elements().get(0)));
+        result.setType(processType(e.elements().get(1)));
+        return result;
+    }
+
+    private ExpandableMode processExpandableMode(Element e) {
+        ExpandableMode result = new ExpandableMode(e);
+        result.setType(processType(e.elements().get(0)));
+        return result;
+    }
+
     private FormulaInterface processFormula(Element e) {
         FormulaInterface result = null;
         switch (e.getName()) {
@@ -278,6 +336,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Negated-Formula":
                 result = processNegatedFormula(e);
+                break;
+            case "Multi-Attributive-Formula":
+                result = processMultiAttributiveFormula(e);
                 break;
             case "Qualifying-Formula":
                 result = processQualifyingFormula(e);
@@ -307,6 +368,15 @@ public class ESX_Processor extends XMLApplication {
         result.setPattern(processPattern(e.elements().get(1)));
         result.setTypeSpecification(processTypeSpecification(e.element("Type-Specification")));
         result.setDefiniens(processDefiniens(e.element("Definiens")));
+        return result;
+    }
+
+    private FunctorialRegistration processFunctorialRegistration(Element e) {
+        FunctorialRegistration result = new FunctorialRegistration(e);
+        result.setTerm(processTerm(e.elements().get(0)));
+        result.setAdjectiveCluster(processAdjectiveCluster(e.elements().get(1)));
+        if (e.elements().size() > 2)
+           result.setType(processType(e.elements().get(2)));
         return result;
     }
 
@@ -353,6 +423,42 @@ public class ESX_Processor extends XMLApplication {
 
     private Locus processLocus(Element e) {
         return new Locus(e);
+    }
+
+    private ModeDefinition processModeDefinition(Element e) {
+        ModeDefinition result = new ModeDefinition(e);
+        result.setRedefine(processRedefine(e.element("Redefine")));
+        result.setPattern(processModePattern(e.elements().get(1)));
+        result.setModeDescription(processModeDescription(e.elements().get(2)));
+        return result;
+    }
+
+    private ModeDescriptionInterface processModeDescription(Element e) {
+        ModeDescriptionInterface result = null;
+        switch (e.getName()) {
+            case "Standard-Mode":
+                result = processStandardMode(e);
+                break;
+            case "Expandable-Mode":
+                result = processExpandableMode(e);
+                break;
+            default:
+                Errors.error(e,"UNKNOWN Mode Kind");
+        }
+        return result;
+    }
+
+    private ModePattern processModePattern(Element e) {
+        ModePattern result = new ModePattern(e);
+        result.setLoci(processLoci(e.element("Loci")));
+        return result;
+    }
+
+    private MultiAttributiveFormula processMultiAttributiveFormula(Element e) {
+        MultiAttributiveFormula result = new MultiAttributiveFormula(e);
+        result.setSubject(processTerm(e.elements().get(0)));
+        result.setAdjectiveCluster(processAdjectiveCluster(e.element("Adjective-Cluster")));
+        return result;
     }
 
     private NegatedFormula processNegatedFormula(Element e) {
@@ -505,6 +611,13 @@ public class ESX_Processor extends XMLApplication {
         return new Reducibility(e);
     }
 
+    private Reduction processReduction(Element e) {
+        Reduction result = new Reduction(e);
+        result.setLeftTerm(processTerm(e.elements().get(0)));
+        result.setRightTerm(processTerm(e.elements().get(1)));
+        return result;
+    }
+
     private RelationFormula processRelationFormula(Element e) {
         RelationFormula result = new RelationFormula(e);
         result.setArguments(processArguments(e.element("Arguments")));
@@ -566,8 +679,16 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private StandardMode processStandardMode(Element e) {
+        StandardMode result = new StandardMode(e);
+        result.setTypeSpecification(processTypeSpecification(e.element("Type-Specification")));
+        result.setDefiniens(processDefiniens(e.element("Definiens")));
+        return result;
+    }
+
     private StandardType processStandardType(Element e) {
         StandardType result = new StandardType(e);
+        result.setArguments(processArguments(e.element("Arguments")));
         return result;
     }
 
@@ -696,11 +817,19 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private RegistrationBlock processRegistrationBlock(Element e) {
+        RegistrationBlock result = new RegistrationBlock(e);
+        return result;
+    }
+
     private Block processBlock(Element e) {
         Block result = null;
         switch (e.attributeValue("kind")) {
             case "Definitional-Block":
                 result = processDefinitionalBlock(e);
+                break;
+            case "Registration-Block":
+                result = processRegistrationBlock(e);
                 break;
             default:
                 Errors.error(e,"UNKNOWN Block");
@@ -715,6 +844,12 @@ public class ESX_Processor extends XMLApplication {
             case "Assumption":
                 result = processAssumption(e.elements().get(0));
                 break;
+            case "Attribute-Definition":
+                result = processAttributeDefinition(e);
+                break;
+            case "Cluster":
+                result = processCluster(e);
+                break;
             case "Correctness":
                 result = processCorrectness(e);
                 break;
@@ -727,6 +862,9 @@ public class ESX_Processor extends XMLApplication {
             case "Functor-Definition":
                 result = processFunctorDefinition(e);
                 break;
+            case "Mode-Definition":
+                result = processModeDefinition(e);
+                break;
             case "Loci-Declaration":
                 result = processLociDeclaration(e);
                 break;
@@ -738,6 +876,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Property":
                 result = processProperty(e);
+                break;
+            case "Reduction":
+                result = processReduction(e);
                 break;
             case "Reservation":
                 result = processReservation(e);

@@ -44,6 +44,6 @@ public class Attribute extends EsxElement {
 
     @Override
     public String toString() {
-        return spelling + " [" + arguments + "]";
+        return (nonocc != null ? "non " : "") + spelling + " [" + arguments + "]";
     }
 }

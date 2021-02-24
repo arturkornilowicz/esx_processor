@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Reduction extends EsxElement {
+public class Reduction extends Item {
+
+    private TermInterface leftTerm;
+    private TermInterface rightTerm;
 
     public Reduction(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class Reduction extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "reduce " + leftTerm + " to " + rightTerm;
     }
 }

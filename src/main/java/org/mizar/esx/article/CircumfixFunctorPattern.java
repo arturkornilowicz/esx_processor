@@ -45,6 +45,6 @@ public class CircumfixFunctorPattern extends EsxElement implements PatternInterf
 
     @Override
     public String toString() {
-        return spelling + loci + rightCircumflexSymbol;
+        return "func " + spelling + loci + rightCircumflexSymbol;
     }
 }

@@ -9,11 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class MultiAttributiveFormula extends EsxElement {
+public class MultiAttributiveFormula extends EsxElement implements FormulaInterface {
 
     private String bracketed;
     private String position;
     private String sort;
+
+    private TermInterface subject;
+    private AdjectiveCluster adjectiveCluster;
 
     public MultiAttributiveFormula(Element element) {
         super(element);
@@ -24,6 +27,6 @@ public class MultiAttributiveFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return subject + " is " + adjectiveCluster;
     }
 }

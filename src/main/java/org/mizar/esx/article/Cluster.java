@@ -9,7 +9,9 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Cluster extends EsxElement {
+public class Cluster extends Item {
+
+    private ClusterRegistrationInterface cluster;
 
     public Cluster(Element element) {
         super(element);
@@ -17,6 +19,6 @@ public class Cluster extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return cluster.toString();
     }
 }

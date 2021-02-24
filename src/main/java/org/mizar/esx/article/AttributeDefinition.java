@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class AttributeDefinition extends EsxElement {
+public class AttributeDefinition extends Item {
 
     private String MMLId;
+
+    private Redefine redefine;
+    private AttributePattern pattern;
+    private Definiens definiens;
 
     public AttributeDefinition(Element element) {
         super(element);
@@ -20,6 +24,6 @@ public class AttributeDefinition extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return redefine + " " + pattern + "\n" + definiens;
     }
 }

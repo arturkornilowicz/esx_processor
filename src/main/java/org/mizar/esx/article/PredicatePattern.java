@@ -45,6 +45,6 @@ public class PredicatePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
+        return "pred " + "(" + leftLoci + ") " + spelling + " (" + rightLoci + ")";
     }
 }

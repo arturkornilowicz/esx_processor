@@ -24,6 +24,8 @@ public class StandardType extends EsxElement implements TypeInterface {
     private String sort;
     private String spelling;
 
+    private Arguments arguments;
+
     public StandardType(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -42,6 +44,6 @@ public class StandardType extends EsxElement implements TypeInterface {
 
     @Override
     public String toString() {
-        return spelling;
+        return spelling + (arguments.getArguments().size() > 0 ? " of " + arguments : "");
     }
 }

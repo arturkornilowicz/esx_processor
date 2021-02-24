@@ -20,6 +20,6 @@ public class Redefine extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return occurs.equals("true") ? "redefine" : "";
     }
 }

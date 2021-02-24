@@ -25,6 +25,9 @@ public class AttributePattern extends EsxElement {
     private String position;
     private String spelling;
 
+    private Locus subject;
+    private Loci arguments;
+
     public AttributePattern(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -44,6 +47,6 @@ public class AttributePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "attr " + subject + " is " + arguments + spelling;
     }
 }
