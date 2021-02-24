@@ -11,12 +11,12 @@ import org.mizar.esx.*;
 
 public class PartialDefiniensList extends EsxElement {
 
+    private ArrayList<PartialDefiniens> partialDefiniens = new ArrayList<>();
+
     public PartialDefiniensList(Element element) {
         super(element);
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return partialDefiniens.toString(); }
 }

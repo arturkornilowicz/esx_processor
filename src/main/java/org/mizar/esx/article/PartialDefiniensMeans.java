@@ -9,14 +9,17 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Consistency extends EsxElement implements CorrectnessConditionInterface {
+public class PartialDefiniensMeans extends PartialDefiniens {
 
-    public Consistency(Element element) {
+    private FormulaInterface formula;
+    private FormulaInterface guard;
+
+    public PartialDefiniensMeans(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return "consistency";
+        return formula + " if " + guard;
     }
 }

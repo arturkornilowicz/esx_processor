@@ -9,14 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Consistency extends EsxElement implements CorrectnessConditionInterface {
+public class DefiniensEqualsComplex extends DefiniensComplex {
 
-    public Consistency(Element element) {
+    public DefiniensEqualsComplex(Element element) {
         super(element);
     }
 
     @Override
-    public String toString() {
-        return "consistency";
-    }
+    public String toString() { return super.toString(); }
 }

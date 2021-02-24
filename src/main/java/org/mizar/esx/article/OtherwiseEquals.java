@@ -9,14 +9,16 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Consistency extends EsxElement implements CorrectnessConditionInterface {
+public class OtherwiseEquals extends Otherwise {
 
-    public Consistency(Element element) {
+    private TermInterface term;
+
+    public OtherwiseEquals(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return "consistency";
+        return "otherwise " + term;
     }
 }

@@ -120,6 +120,10 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Consistency processConsistency(Element e) {
+        return new Consistency(e);
+    }
+
     private Correctness processCorrectness(Element e) {
         Correctness result = new Correctness(e);
         result.setCorrectnessConditions(processCorrectnessConditions(e.element("Correctness-Conditions")));
@@ -137,6 +141,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "compatibility":
                 correctnessCondition = processCompatibility(eCondition);
+                break;
+            case "consistency":
+                correctnessCondition = processConsistency(eCondition);
                 break;
             case "existence":
                 correctnessCondition = processExistence(eCondition);
@@ -186,15 +193,37 @@ public class ESX_Processor extends XMLApplication {
         Definiens result = null;
         switch (e.attributeValue("shape")) {
             case "Formula-Expression":
-                result = new DefiniensMeans(e);
-                ((DefiniensMeans)result).setFormula(processFormula(e.elements().get(1)));
+                switch (e.attributeValue("kind")) {
+                    case "Simple-Definiens":
+                        result = new DefiniensMeans(e);
+                        ((DefiniensMeans) result).setFormula(processFormula(e.elements().get(1)));
+                        break;
+                    case "Conditional-Definiens":
+                        result = new DefiniensComplex(e);
+                        ((DefiniensComplex) result).setPartialDefiniensList(processPartialDefiniensList(e.element("Partial-Definiens-List"),"formula"));
+                        ((DefiniensComplex) result).setOtherwise(processOtherwise(e.element("Otherwise"),"formula"));
+                        break;
+                    default:
+                        Errors.error(e,"UNKNOWN Definiens Kind");
+                }
                 break;
             case "Term-Expression":
-                result = new DefiniensEquals(e);
-                ((DefiniensEquals)result).setTerm(processTerm(e.elements().get(1)));
+                switch (e.attributeValue("kind")) {
+                    case "Simple-Definiens":
+                        result = new DefiniensEquals(e);
+                        ((DefiniensEquals) result).setTerm(processTerm(e.elements().get(1)));
+                        break;
+                    case "Conditional-Definiens":
+                        result = new DefiniensComplex(e);
+                        ((DefiniensComplex) result).setPartialDefiniensList(processPartialDefiniensList(e.element("Partial-Definiens-List"),"term"));
+                        ((DefiniensComplex) result).setOtherwise(processOtherwise(e.element("Otherwise"),"term"));
+                        break;
+                    default:
+                        Errors.error(e,"UNKNOWN Definiens Kind");
+                }
                 break;
             default:
-                Errors.error(e, "UNKNOWN Definiens");
+                Errors.error(e, "UNKNOWN Definiens Shape");
         }
         return result;
     }
@@ -260,7 +289,7 @@ public class ESX_Processor extends XMLApplication {
                 result = processUniversalQuantifierFormula(e);
                 break;
             default:
-                Errors.error(e, "FORMULA");
+                Errors.error(e, "UNKNOWN FORMULA");
         }
         return result;
     }
@@ -338,6 +367,50 @@ public class ESX_Processor extends XMLApplication {
 
     private NumeralTerm processNumeralTerm(Element e) {
         return new NumeralTerm(e);
+    }
+
+    private Otherwise processOtherwise(Element e, String shape) {
+        Otherwise result = null;
+        switch (shape) {
+            case "formula":
+                result = new OtherwiseMeans(e);
+                ((OtherwiseMeans)result).setFormula(processFormula(e.elements().get(0)));
+                break;
+            case "term":
+                result = new OtherwiseEquals(e);
+                ((OtherwiseEquals)result).setTerm(processTerm(e.elements().get(0)));
+                break;
+        }
+        return result;
+    }
+
+    private PartialDefiniensEquals processPartialDefiniensEquals(Element e) {
+        PartialDefiniensEquals result = new PartialDefiniensEquals(e);
+        result.setTerm(processTerm(e.elements().get(0)));
+        result.setGuard(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private PartialDefiniensMeans processPartialDefiniensMeans(Element e) {
+        PartialDefiniensMeans result = new PartialDefiniensMeans(e);
+        result.setFormula(processFormula(e.elements().get(0)));
+        result.setGuard(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private PartialDefiniensList processPartialDefiniensList(Element e, String shape) {
+        PartialDefiniensList result = new PartialDefiniensList(e);
+        for (Element element: e.elements()) {
+            switch (shape) {
+                case "formula":
+                    result.getPartialDefiniens().add(processPartialDefiniensMeans(element));
+                    break;
+                case "term":
+                    result.getPartialDefiniens().add(processPartialDefiniensEquals(element));
+                    break;
+            }
+        }
+        return result;
     }
 
     private PatternInterface processPattern(Element e) {

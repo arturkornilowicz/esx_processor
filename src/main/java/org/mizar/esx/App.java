@@ -10,8 +10,13 @@ public class App extends ESX_Processor {
 
     public static void main(String[] args ) {
         App app = new App("text","tarski",".esx");
-        app.processArticle();
-        System.out.println("Article:\n" + app.getTextProper());
-        Errors.printErrors();
+        try {
+            app.processArticle();
+            System.out.println("Article:\n" + app.getTextProper());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Errors.printErrors();
+        }
     }
 }
