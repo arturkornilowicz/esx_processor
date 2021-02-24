@@ -9,9 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PredicateSegment extends EsxElement {
+public class PredicateSegment extends EsxElement implements SchemaInputSegment {
 
     private String position;
+
+    private Variables variables;
+    private TypeList argumentTypes;
 
     public PredicateSegment(Element element) {
         super(element);
@@ -20,6 +23,6 @@ public class PredicateSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return variables + "[" + argumentTypes + "]";
     }
 }

@@ -9,9 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class FunctorSegment extends EsxElement {
+public class FunctorSegment extends EsxElement implements SchemaInputSegment {
 
     private String position;
+
+    private Variables variables;
+    private TypeList argumentTypes;
+    private TypeSpecification resultType;
 
     public FunctorSegment(Element element) {
         super(element);
@@ -20,6 +24,6 @@ public class FunctorSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return variables + " (" + argumentTypes + ") " + resultType;
     }
 }

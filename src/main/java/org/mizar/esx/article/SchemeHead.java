@@ -9,7 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SchemeHead extends EsxElement {
+public class SchemeHead extends Item {
+
+    private Scheme scheme;
+    private SchematicVariables schematicVariables;
+    private FormulaInterface formula;
+    private ProvisionalFormulas provisionalFormulas;
 
     public SchemeHead(Element element) {
         super(element);
@@ -17,6 +22,6 @@ public class SchemeHead extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return scheme + " " + schematicVariables + ":\n" + formula + " " + provisionalFormulas;
     }
 }

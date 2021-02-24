@@ -9,13 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SchemeBlockItem extends Item {
+public class SchemeBlock extends Block {
 
-    private String MMLId;
-
-    public SchemeBlockItem(Element element) {
+    public SchemeBlock(Element element) {
         super(element);
-        this.MMLId = Misc.assignAttrValue(element,"MMLId");
     }
 
     @Override

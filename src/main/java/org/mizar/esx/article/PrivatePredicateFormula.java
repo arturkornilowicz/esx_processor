@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PrivatePredicateFormula extends EsxElement {
+public class PrivatePredicateFormula extends EsxElement implements FormulaInterface {
 
     private String constrnr;
     private String idnr;
@@ -18,6 +18,8 @@ public class PrivatePredicateFormula extends EsxElement {
     private String serialnr;
     private String sort;
     private String spelling;
+
+    private Arguments arguments;
 
     public PrivatePredicateFormula(Element element) {
         super(element);
@@ -32,6 +34,6 @@ public class PrivatePredicateFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + "[" + arguments + "]";
     }
 }

@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class SchematicVariables extends EsxElement {
 
+    private ArrayList<SchemaInputSegment> segments = new ArrayList<>();
+
     public SchematicVariables(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return segments.toString();
     }
 }

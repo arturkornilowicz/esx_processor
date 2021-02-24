@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class ProvisionalFormulas extends EsxElement {
 
+    private ArrayList<Proposition> provisionals = new ArrayList<>();
+
     public ProvisionalFormulas(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return provisionals.size() > 0 ? "\nprovided " + provisionals.toString() : "";
     }
 }

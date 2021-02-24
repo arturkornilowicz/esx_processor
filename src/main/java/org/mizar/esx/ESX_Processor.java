@@ -347,6 +347,9 @@ public class ESX_Processor extends XMLApplication {
             case "Multi-Attributive-Formula":
                 result = processMultiAttributiveFormula(e);
                 break;
+            case "Private-Predicate-Formula":
+                result = processPrivatePredicateFormula(e);
+                break;
             case "Qualifying-Formula":
                 result = processQualifyingFormula(e);
                 break;
@@ -635,6 +638,18 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private PrivateFunctorTerm processPrivateFunctorTerm(Element e) {
+        PrivateFunctorTerm result = new PrivateFunctorTerm(e);
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
+    private PrivatePredicateFormula processPrivatePredicateFormula(Element e) {
+        PrivatePredicateFormula result = new PrivatePredicateFormula(e);
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
     private Properties processProperties(Element e) {
         return new Properties(e);
     }
@@ -776,6 +791,9 @@ public class ESX_Processor extends XMLApplication {
             case "Numeral-Term":
                 result = processNumeralTerm(e);
                 break;
+            case "Private-Functor-Term":
+                result = processPrivateFunctorTerm(e);
+                break;
             case "Simple-Term":
                 result = processSimpleTerm(e);
                 break;
@@ -874,6 +892,77 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    /* SCHEMES */
+
+    private SchemeBlockItem processSchemeBlockItem(Element e) {
+        SchemeBlockItem result = new SchemeBlockItem(e);
+        return result;
+    }
+
+    private Scheme processScheme(Element e) {
+        return new Scheme(e);
+    }
+
+    private SchematicVariables processSchematicVariables(Element e) {
+        SchematicVariables result = new SchematicVariables(e);
+        for (Element element: e.elements())
+            result.getSegments().add(processSchemeInputSegment(element));
+        return result;
+    }
+
+    private SchemeHead processSchemeHead(Element e) {
+        SchemeHead result = new SchemeHead(e);
+        result.setScheme(processScheme(e.element("Scheme")));
+        result.setSchematicVariables(processSchematicVariables(e.element("Schematic-Variables")));
+        result.setFormula(processFormula(e.elements().get(2)));
+        result.setProvisionalFormulas(processProvisionalFormulas(e.element("Provisional-Formulas")));
+        return result;
+    }
+
+    private SchemaInputSegment processSchemeInputSegment(Element e) {
+        SchemaInputSegment result = null;
+        switch (e.getName()) {
+            case "Functor-Segment":
+                result = processFunctorSegment(e);
+                break;
+            case "Predicate-Segment":
+                result = processPredicateSegment(e);
+                break;
+            default:
+                Errors.error(e,"UNKNOWN Segment");
+        }
+        return result;
+    }
+
+    private FunctorSegment processFunctorSegment(Element e) {
+        FunctorSegment result = new FunctorSegment(e);
+        result.setVariables(processVariables(e.element("Variables")));
+        result.setArgumentTypes(processTypeList(e.element("Type-List")));
+        result.setResultType(processTypeSpecification(e.element("Type-Specification")));
+        return result;
+    }
+
+    private PredicateSegment processPredicateSegment(Element e) {
+        PredicateSegment result = new PredicateSegment(e);
+        result.setVariables(processVariables(e.element("Variables")));
+        result.setArgumentTypes(processTypeList(e.element("Type-List")));
+        return result;
+    }
+
+    private TypeList processTypeList(Element e) {
+        TypeList result = new TypeList(e);
+        for (Element element: e.elements())
+            result.getTypes().add(processType(element));
+        return result;
+    }
+
+    private ProvisionalFormulas processProvisionalFormulas(Element e) {
+        ProvisionalFormulas result = new ProvisionalFormulas(e);
+        for (Element element: e.elements())
+            result.getProvisionals().add(processProposition(element));
+        return result;
+    }
+
     /* BLOCKS */
 
     private DefinitionalBlock processDefinitionalBlock(Element e) {
@@ -891,6 +980,11 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private SchemeBlock processSchemeBlock(Element e) {
+        SchemeBlock result = new SchemeBlock(e);
+        return result;
+    }
+
     private Block processBlock(Element e) {
         Block result = null;
         switch (e.attributeValue("kind")) {
@@ -902,6 +996,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Registration-Block":
                 result = processRegistrationBlock(e);
+                break;
+            case "Scheme-Block":
+                result = processSchemeBlock(e);
                 break;
             default:
                 Errors.error(e,"UNKNOWN Block");
@@ -961,6 +1058,9 @@ public class ESX_Processor extends XMLApplication {
             case "Pred-Antonym":
                 result = processPredAntonym(e);
                 break;
+            case "Scheme-Head":
+                result = processSchemeHead(e);
+                break;
             case "Pred-Synonym":
                 result = processPredSynonym(e);
                 break;
@@ -975,6 +1075,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Reservation":
                 result = processReservation(e);
+                break;
+            case "Scheme-Block-Item":
+                result = processSchemeBlockItem(e);
                 break;
             case "Section-Pragma":
                 result = processSection(e);

@@ -24,6 +24,6 @@ public class Scheme extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

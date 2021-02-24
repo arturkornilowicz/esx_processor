@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class TypeList extends EsxElement {
 
+    private ArrayList<TypeInterface> types = new ArrayList<>();
+
     public TypeList(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return types.toString();
     }
 }

@@ -9,7 +9,7 @@ public class App extends ESX_Processor {
     }
 
     public static void main(String[] args ) {
-        App app = new App("text","subset_1",".esx");
+        App app = new App("text","tarski",".esx");
         try {
             app.processArticle();
             System.out.println("Article:\n" + app.getTextProper());

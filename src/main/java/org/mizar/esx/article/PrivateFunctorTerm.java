@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PrivateFunctorTerm extends EsxElement {
+public class PrivateFunctorTerm extends EsxElement implements TermInterface {
 
     private String idnr;
     private String nr;
@@ -17,6 +17,8 @@ public class PrivateFunctorTerm extends EsxElement {
     private String serialnr;
     private String sort;
     private String spelling;
+
+    private Arguments arguments;
 
     public PrivateFunctorTerm(Element element) {
         super(element);
@@ -30,6 +32,6 @@ public class PrivateFunctorTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + "(" + arguments + ")";
     }
 }
