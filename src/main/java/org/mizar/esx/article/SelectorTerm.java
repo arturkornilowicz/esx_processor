@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class SelectorTerm extends EsxElement {
+public class SelectorTerm extends EsxElement implements TermInterface {
 
     private String absoluteconstrMMLId;
     private String absolutepatternMMLId;
@@ -20,6 +20,8 @@ public class SelectorTerm extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private TermInterface argument;
 
     public SelectorTerm(Element element) {
         super(element);
@@ -36,6 +38,6 @@ public class SelectorTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + " of " + argument;
     }
 }

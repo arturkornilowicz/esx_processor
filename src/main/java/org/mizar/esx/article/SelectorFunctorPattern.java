@@ -20,6 +20,8 @@ public class SelectorFunctorPattern extends EsxElement {
     private String position;
     private String spelling;
 
+    private Loci loci;
+
     public SelectorFunctorPattern(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -34,6 +36,6 @@ public class SelectorFunctorPattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + " " + loci;
     }
 }

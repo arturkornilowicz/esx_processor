@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class InternalSelectorTerm extends EsxElement {
+public class InternalSelectorTerm extends EsxElement implements TermInterface {
 
     private String absolutenr;
     private String nr;
@@ -32,6 +32,6 @@ public class InternalSelectorTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling;
     }
 }

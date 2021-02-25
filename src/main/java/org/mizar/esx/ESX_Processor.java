@@ -418,6 +418,10 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private InternalSelectorTerm processInternalSelectorTerm(Element e) {
+        return new InternalSelectorTerm(e);
+    }
+
     private ItTerm processItTerm(Element e) {
         return new ItTerm(e);
     }
@@ -585,6 +589,10 @@ public class ESX_Processor extends XMLApplication {
                 result = new PredicatePattern(e);
                 ((PredicatePattern)result).setLeftLoci(processLoci(e.elements().get(0)));
                 ((PredicatePattern)result).setRightLoci(processLoci(e.elements().get(1)));
+                break;
+            case "Structure-Pattern":
+                result = new StructurePattern(e);
+                ((StructurePattern)result).setLoci(processLoci(e.element("Loci")));
                 break;
             default:
                 Errors.error(e,"UNKNOWN Pattern");
@@ -771,19 +779,32 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private StructType processStructType(Element e) {
+        StructType result = new StructType(e);
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
     private Substitutions processSubstitutions(Element e) {
         Substitutions result = new Substitutions();
+        // TODO
         return result;
     }
 
     private TermInterface processTerm(Element e) {
         TermInterface result = null;
         switch (e.getName()) {
+            case "Aggregate-Term":
+                result = processAggregateTerm(e);
+                break;
             case "Circumfix-Term":
                 result = processCircumfixTerm(e);
                 break;
             case "Infix-Term":
                 result = processInfixTerm(e);
+                break;
+            case "Internal-Selector-Term":
+                result = processInternalSelectorTerm(e);
                 break;
             case "it-Term":
                 result = processItTerm(e);
@@ -793,6 +814,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Private-Functor-Term":
                 result = processPrivateFunctorTerm(e);
+                break;
+            case "Selector-Term":
+                result = processSelectorTerm(e);
                 break;
             case "Simple-Term":
                 result = processSimpleTerm(e);
@@ -826,6 +850,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Standard-Type":
                 result = processStandardType(e);
+                break;
+            case "Struct-Type":
+                result = processStructType(e);
                 break;
             default:
                 Errors.error(e, "UNKNOWN TYPE");
@@ -963,6 +990,104 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    /* STRUCTURES */
+
+    private StructureDefinition processStructureDefinition(Element e) {
+        StructureDefinition result = new StructureDefinition(e);
+        result.setAncestors(processAncestors(e.element("Ancestors")));
+        result.setPattern(processPattern(e.element("Structure-Pattern")));
+        result.setFieldSegments(processFieldSegments(e.element("Field-Segments")));
+        result.setStructurePatternsRendering(processStructurePatternsRendering(e.element("Structure-Patterns-Rendering")));
+        return result;
+    }
+
+    private Ancestors processAncestors(Element e) {
+        Ancestors result = new Ancestors(e);
+        for (Element element: e.elements())
+            result.getAncestors().add(processType(element));
+        return result;
+    }
+
+    private AggregateTerm processAggregateTerm(Element e) {
+        AggregateTerm result = new AggregateTerm(e);
+        result.setArguments(processArguments(e.element("Arguments")));
+        return result;
+    }
+
+    private FieldSegment processFieldSegment(Element e) {
+        FieldSegment result = new FieldSegment(e);
+        result.setSelectors(processSelectors(e.element("Selectors")));
+        result.setType(processType(e.elements().get(1)));
+        return result;
+    }
+
+    private FieldSegments processFieldSegments(Element e) {
+        FieldSegments result = new FieldSegments(e);
+        for (Element element: e.elements())
+            result.getFieldSegments().add(processFieldSegment(element));
+        return result;
+    }
+
+    private SelectorTerm processSelectorTerm(Element e) {
+        SelectorTerm result = new SelectorTerm(e);
+        result.setArgument(processTerm(e.elements().get(0)));
+        return result;
+    }
+
+    private Selector processSelector(Element e) {
+        Selector result = new Selector(e);
+        result.setLocus(processLocus(e.element("Locus")));
+        return result;
+    }
+
+    private Selectors processSelectors(Element e) {
+        Selectors result = new Selectors(e);
+        for (Element element: e.elements())
+            result.getSelectors().add(processSelector(element));
+        return result;
+    }
+
+    private StructurePatternsRendering processStructurePatternsRendering(Element e) {
+        StructurePatternsRendering result = new StructurePatternsRendering(e);
+        result.setAggregateFunctorPattern(processAggregateFunctorPattern(e.element("AggregateFunctor-Pattern")));
+        result.setForgetfulFunctorPattern(processForgetfulFunctorPattern(e.element("ForgetfulFunctor-Pattern")));
+        result.setStrictPattern(processStrictPattern(e.element("Strict-Pattern")));
+        result.setSelectorsList(processSelectorsList(e.element("Selectors-List")));
+        return result;
+    }
+
+    private AggregateFunctorPattern processAggregateFunctorPattern(Element e) {
+        AggregateFunctorPattern result = new AggregateFunctorPattern(e);
+        result.setLoci(processLoci(e.element("Loci")));
+        return result;
+    }
+
+    private ForgetfulFunctorPattern processForgetfulFunctorPattern(Element e) {
+        ForgetfulFunctorPattern result = new ForgetfulFunctorPattern(e);
+        result.setLoci(processLoci(e.element("Loci")));
+        return result;
+    }
+
+    private StrictPattern processStrictPattern(Element e) {
+        StrictPattern result = new StrictPattern(e);
+        result.setLocus(processLocus(e.element("Locus")));
+        result.setLoci(processLoci(e.element("Loci")));
+        return result;
+    }
+
+    private SelectorFunctorPattern processSelectorFunctorPattern(Element e) {
+        SelectorFunctorPattern result = new SelectorFunctorPattern(e);
+        result.setLoci(processLoci(e.element("Loci")));
+        return result;
+    }
+
+    private SelectorsList processSelectorsList(Element e) {
+        SelectorsList result = new SelectorsList(e);
+        for (Element element: e.elements())
+            result.getSelectorFunctorPatterns().add(processSelectorFunctorPattern(element));
+        return result;
+    }
+
     /* BLOCKS */
 
     private DefinitionalBlock processDefinitionalBlock(Element e) {
@@ -1081,6 +1206,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Section-Pragma":
                 result = processSection(e);
+                break;
+            case "Structure-Definition":
+                result = processStructureDefinition(e);
                 break;
             case "Theorem-Item":
                 result = processTheoremItem(e);

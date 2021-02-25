@@ -21,6 +21,9 @@ public class StrictPattern extends EsxElement {
     private String position;
     private String spelling;
 
+    private Locus locus;
+    private Loci loci;
+
     public StrictPattern(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -36,6 +39,6 @@ public class StrictPattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "strict " + locus;
     }
 }

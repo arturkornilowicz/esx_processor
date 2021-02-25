@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class FieldSegments extends EsxElement {
 
+    private ArrayList<FieldSegment> fieldSegments = new ArrayList<>();
+
     public FieldSegments(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return fieldSegments.toString();
     }
 }

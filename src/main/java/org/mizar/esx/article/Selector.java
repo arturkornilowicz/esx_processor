@@ -15,6 +15,8 @@ public class Selector extends EsxElement {
     private String position;
     private String spelling;
 
+    private Locus locus;
+
     public Selector(Element element) {
         super(element);
         this.nr = Misc.assignAttrValue(element,"nr");
@@ -24,6 +26,6 @@ public class Selector extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return locus.toString();
     }
 }

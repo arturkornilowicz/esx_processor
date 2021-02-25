@@ -17,6 +17,6 @@ public class SectionPragma extends Item {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "begin";
     }
 }

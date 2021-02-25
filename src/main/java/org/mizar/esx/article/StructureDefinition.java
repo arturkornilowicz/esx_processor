@@ -9,7 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StructureDefinition extends EsxElement {
+public class StructureDefinition extends Item {
+
+    private Ancestors ancestors;
+    private PatternInterface pattern;
+    private FieldSegments fieldSegments;
+    private StructurePatternsRendering structurePatternsRendering;
 
     public StructureDefinition(Element element) {
         super(element);
@@ -17,6 +22,6 @@ public class StructureDefinition extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return ancestors + " " + pattern + "\n(#" + fieldSegments + "#)" + "\nRENDER: " + structurePatternsRendering;
     }
 }

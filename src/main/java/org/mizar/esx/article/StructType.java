@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StructType extends EsxElement {
+public class StructType extends EsxElement implements TypeInterface {
 
     private String absoluteconstrMMLId;
     private String absolutepatternMMLId;
@@ -21,6 +21,8 @@ public class StructType extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private Arguments arguments;
 
     public StructType(Element element) {
         super(element);
@@ -38,6 +40,6 @@ public class StructType extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + (arguments.getArguments().size() > 0 ? " over " + arguments : "");
     }
 }

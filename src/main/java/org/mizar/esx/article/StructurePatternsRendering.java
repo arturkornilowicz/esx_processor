@@ -11,12 +11,17 @@ import org.mizar.esx.*;
 
 public class StructurePatternsRendering extends EsxElement {
 
+    private AggregateFunctorPattern aggregateFunctorPattern;
+    private ForgetfulFunctorPattern forgetfulFunctorPattern;
+    private StrictPattern strictPattern;
+    private SelectorsList selectorsList;
+
     public StructurePatternsRendering(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return aggregateFunctorPattern + ", " + forgetfulFunctorPattern + ", " + strictPattern + ", " + selectorsList;
     }
 }

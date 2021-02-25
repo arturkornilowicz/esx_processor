@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StructurePattern extends EsxElement {
+public class StructurePattern extends EsxElement implements PatternInterface {
 
     private String absoluteconstrMMLId;
     private String absolutepatternMMLId;
@@ -19,6 +19,8 @@ public class StructurePattern extends EsxElement {
     private String patternnr;
     private String position;
     private String spelling;
+
+    private Loci loci;
 
     public StructurePattern(Element element) {
         super(element);
@@ -34,6 +36,6 @@ public class StructurePattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return loci.toString();
     }
 }

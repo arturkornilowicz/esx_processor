@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Selectors extends EsxElement {
 
+    private ArrayList<Selector> selectors = new ArrayList<>();
+
     public Selectors(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return selectors.toString();
     }
 }

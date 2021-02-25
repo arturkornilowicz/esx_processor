@@ -11,12 +11,14 @@ import org.mizar.esx.*;
 
 public class Ancestors extends EsxElement {
 
+    private ArrayList<TypeInterface> ancestors = new ArrayList<>();
+
     public Ancestors(Element element) {
         super(element);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "(" + ancestors + ")";
     }
 }

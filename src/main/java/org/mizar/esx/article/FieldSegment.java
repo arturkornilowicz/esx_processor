@@ -13,6 +13,9 @@ public class FieldSegment extends EsxElement {
 
     private String position;
 
+    private Selectors selectors;
+    private TypeInterface type;
+
     public FieldSegment(Element element) {
         super(element);
         this.position = Misc.assignAttrValue(element,"position");
@@ -20,6 +23,6 @@ public class FieldSegment extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return selectors + " -> " + type;
     }
 }

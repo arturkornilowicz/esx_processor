@@ -20,6 +20,8 @@ public class AggregateFunctorPattern extends EsxElement {
     private String position;
     private String spelling;
 
+    private Loci loci;
+
     public AggregateFunctorPattern(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -34,6 +36,6 @@ public class AggregateFunctorPattern extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + loci;
     }
 }
