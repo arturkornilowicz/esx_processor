@@ -984,6 +984,8 @@ public class ESX_Processor extends XMLApplication {
     }
 
     private ProvisionalFormulas processProvisionalFormulas(Element e) {
+        if (e == null)
+            return null;
         ProvisionalFormulas result = new ProvisionalFormulas(e);
         for (Element element: e.elements())
             result.getProvisionals().add(processProposition(element));
