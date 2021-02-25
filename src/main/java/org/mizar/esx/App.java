@@ -12,14 +12,16 @@ public class App extends ESX_Processor {
         App app = new App(args[0],args[1],".esx");
         System.out.println(app.getFileName() + " processing.");
         Errors errors = new Errors(app.getFileName());
+        boolean RTE = false;
         try {
             app.processArticle();
-            System.out.println("Article:\n" + app.getTextProper());
+//            System.out.println("Article:\n" + app.getTextProper());
         } catch (Exception e) {
+            RTE = true;
             e.printStackTrace();
         } finally {
-            errors.printErrors();
-            errors.writeErrors();
+//            errors.printErrors();
+            errors.writeErrors(RTE);
         }
     }
 }

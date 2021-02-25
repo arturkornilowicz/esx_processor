@@ -20,6 +20,6 @@ public class PropertyRegistration extends Item {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "sethood of " + properties + " " + justification;
     }
 }

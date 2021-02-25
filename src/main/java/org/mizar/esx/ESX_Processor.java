@@ -578,11 +578,13 @@ public class ESX_Processor extends XMLApplication {
         switch (shape) {
             case "formula":
                 result = new OtherwiseMeans(e);
-                ((OtherwiseMeans)result).setFormula(processFormula(e.elements().get(0)));
+                if (e.elements().size() > 0)
+                    ((OtherwiseMeans)result).setFormula(processFormula(e.elements().get(0)));
                 break;
             case "term":
                 result = new OtherwiseEquals(e);
-                ((OtherwiseEquals)result).setTerm(processTerm(e.elements().get(0)));
+                if (e.elements().size() > 0)
+                    ((OtherwiseEquals)result).setTerm(processTerm(e.elements().get(0)));
                 break;
         }
         return result;
@@ -713,11 +715,21 @@ public class ESX_Processor extends XMLApplication {
     }
 
     private Properties processProperties(Element e) {
-        return new Properties(e);
+        Properties result = new Properties(e);
+        if (e.elements().size() > 0)
+            result.setType(processType(e.elements().get(0)));
+        return result;
     }
 
     private Property processProperty(Element e) {
         Property result = new Property(e);
+        result.setProperties(processProperties(e.element("Properties")));
+        result.setJustification(processJustification(e.elements().get(1)));
+        return result;
+    }
+
+    private PropertyRegistration processPropertyRegistration(Element e) {
+        PropertyRegistration result = new PropertyRegistration(e);
         result.setProperties(processProperties(e.element("Properties")));
         result.setJustification(processJustification(e.elements().get(1)));
         return result;
@@ -1282,6 +1294,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Property":
                 result = processProperty(e);
+                break;
+            case "Property-Registration":
+                result = processPropertyRegistration(e);
                 break;
             case "Reduction":
                 result = processReduction(e);

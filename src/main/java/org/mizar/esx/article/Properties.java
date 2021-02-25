@@ -14,6 +14,8 @@ public class Properties extends EsxElement {
     private String property;
     private String sort;
 
+    private TypeInterface type;
+
     public Properties(Element element) {
         super(element);
         this.property = Misc.assignAttrValue(element,"property");
@@ -22,6 +24,6 @@ public class Properties extends EsxElement {
 
     @Override
     public String toString() {
-        return property;
+        return property + " " + type;
     }
 }

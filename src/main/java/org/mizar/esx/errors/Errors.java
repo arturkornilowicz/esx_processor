@@ -24,7 +24,7 @@ public class Errors {
         System.out.println(errorNbr + " errors found:\n" + errors);
     }
 
-    public void writeErrors() {
+    public void writeErrors(boolean RTE) {
         FileWriter fw = null;
         BufferedWriter bw = null;
         PrintWriter out = null;
@@ -33,6 +33,8 @@ public class Errors {
             bw = new BufferedWriter(fw);
             out = new PrintWriter(bw);
             out.println("#" + fileName);
+            if (RTE)
+                out.println("  RTE");
             for (String error : errors)
                 out.println("  ERROR: " + error);
             out.close();
