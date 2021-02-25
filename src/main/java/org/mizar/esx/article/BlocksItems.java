@@ -8,7 +8,7 @@ public class BlocksItems {
     private static Stack<Item> items = new Stack<>();
 
     public static void addBlock(Block block) {
-        System.out.println("+++ Block \"" + block.getKind() + "\" added.");
+//        System.out.println("+++ Block \"" + block.getKind() + "\" added.");
         blocks.push(block);
     }
 
@@ -26,7 +26,7 @@ public class BlocksItems {
 
     public static Block removeLastBlock() {
         Block result = blocks.pop();
-        System.out.println("--- Block \"" + result.getKind() + "\" removed.");
+//        System.out.println("--- Block \"" + result.getKind() + "\" removed.");
         return result;
     }
 

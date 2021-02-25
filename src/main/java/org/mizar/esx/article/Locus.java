@@ -34,6 +34,6 @@ public class Locus extends EsxElement {
 
     @Override
     public String toString() {
-        return idnr + spelling;
+        return spelling;
     }
 }

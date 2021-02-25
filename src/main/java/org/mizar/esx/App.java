@@ -9,14 +9,17 @@ public class App extends ESX_Processor {
     }
 
     public static void main(String[] args ) {
-        App app = new App("text","vectsp_2",".esx");
+        App app = new App(args[0],args[1],".esx");
+        System.out.println(app.getFileName() + " processing.");
+        Errors errors = new Errors(app.getFileName());
         try {
             app.processArticle();
-            System.out.println("Article:\n" + app.getTextProper());
+//            System.out.println("Article:\n" + app.getTextProper());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            Errors.printErrors();
+//            errors.printErrors();
+            errors.writeErrors();
         }
     }
 }
