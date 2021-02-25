@@ -9,10 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class QualificationTerm extends EsxElement {
+public class QualificationTerm extends EsxElement implements TermInterface {
 
     private String position;
     private String sort;
+
+    private TermInterface term;
+    private TypeInterface type;
 
     public QualificationTerm(Element element) {
         super(element);
@@ -22,6 +25,6 @@ public class QualificationTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return term + " is " + type;
     }
 }

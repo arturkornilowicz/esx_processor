@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class PropertyRegistration extends EsxElement {
+public class PropertyRegistration extends Item {
+
+    private Properties properties;
+    private JustificationInterface justification;
 
     public PropertyRegistration(Element element) {
         super(element);

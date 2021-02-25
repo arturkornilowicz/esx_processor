@@ -173,6 +173,10 @@ public class ESX_Processor extends XMLApplication {
         return new Consistency(e);
     }
 
+    private Contradiction processContradiction(Element e) {
+        return new Contradiction(e);
+    }
+
     private Correctness processCorrectness(Element e) {
         Correctness result = new Correctness(e);
         result.setCorrectnessConditions(processCorrectnessConditions(e.element("Correctness-Conditions")));
@@ -296,6 +300,13 @@ public class ESX_Processor extends XMLApplication {
         return new Existence(e);
     }
 
+    private ExistentialAssumption processExistentialAssumption(Element e) {
+        ExistentialAssumption result = new ExistentialAssumption(e);
+        result.setQualifiedSegments(processQualifiedSegments(e.element("Qualified-Segments")));
+        result.setConditions(processConditions(e.element("Conditions")));
+        return result;
+    }
+
     private ExistentialQuantifierFormula processExistentialQuantifierFormula(Element e) {
         ExistentialQuantifierFormula result = new ExistentialQuantifierFormula(e);
         result.setVariableSegments(processVariableSegments(e.element("Variable-Segments")));
@@ -323,6 +334,26 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private FlexaryConjunctiveFormula processFlexaryConjunctiveFormula(Element e) {
+        FlexaryConjunctiveFormula result = new FlexaryConjunctiveFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private FlexaryDisjunctiveFormula processFlexaryDisjunctiveFormula(Element e) {
+        FlexaryDisjunctiveFormula result = new FlexaryDisjunctiveFormula(e);
+        result.setArg1(processFormula(e.elements().get(0)));
+        result.setArg2(processFormula(e.elements().get(1)));
+        return result;
+    }
+
+    private ForgetfulFunctorTerm processForgetfulFunctorTerm(Element e) {
+        ForgetfulFunctorTerm result = new ForgetfulFunctorTerm(e);
+        result.setTerm(processTerm(e.elements().get(0)));
+        return result;
+    }
+
     private FormulaInterface processFormula(Element e) {
         FormulaInterface result = null;
         switch (e.getName()) {
@@ -335,11 +366,20 @@ public class ESX_Processor extends XMLApplication {
             case "Conjunctive-Formula":
                 result = processConjunctiveFormula(e);
                 break;
+            case "Contradiction":
+                result = processContradiction(e);
+                break;
             case "Disjunctive-Formula":
                 result = processDisjunctiveFormula(e);
                 break;
             case "Existential-Quantifier-Formula":
                 result = processExistentialQuantifierFormula(e);
+                break;
+            case "FlexaryConjunctive-Formula":
+                result = processFlexaryConjunctiveFormula(e);
+                break;
+            case "FlexaryDisjunctive-Formula":
+                result = processFlexaryDisjunctiveFormula(e);
                 break;
             case "Negated-Formula":
                 result = processNegatedFormula(e);
@@ -362,6 +402,14 @@ public class ESX_Processor extends XMLApplication {
             default:
                 Errors.error(e, "UNKNOWN FORMULA");
         }
+        return result;
+    }
+
+    private FraenkelTerm processFraenkelTerm(Element e) {
+        FraenkelTerm result = new FraenkelTerm(e);
+        result.setVariableSegments(processVariableSegments(e.elements().get(0)));
+        result.setTerm(processTerm(e.elements().get(1)));
+        result.setFormula(processFormula(e.elements().get(2)));
         return result;
     }
 
@@ -394,6 +442,12 @@ public class ESX_Processor extends XMLApplication {
         result.setAdjectiveCluster(processAdjectiveCluster(e.elements().get(1)));
         if (e.elements().size() > 2)
            result.setType(processType(e.elements().get(2)));
+        return result;
+    }
+
+    private GlobalChoiceTerm processGlobalChoiceTerm(Element e) {
+        GlobalChoiceTerm result = new GlobalChoiceTerm(e);
+        result.setType(processType(e.elements().get(0)));
         return result;
     }
 
@@ -676,6 +730,13 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private QualificationTerm processQualificationTerm(Element e) {
+        QualificationTerm result = new QualificationTerm(e);
+        result.setTerm(processTerm(e.elements().get(0)));
+        result.setType(processType(e.elements().get(1)));
+        return result;
+    }
+
     private QualifiedSegments processQualifiedSegments(Element e) {
         QualifiedSegments result = new QualifiedSegments(e);
         for (Element element : e.elements())
@@ -756,6 +817,13 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private SimpleFraenkelTerm processSimpleFraenkelTerm(Element e) {
+        SimpleFraenkelTerm result = new SimpleFraenkelTerm(e);
+        result.setVariableSegments(processVariableSegments(e.elements().get(0)));
+        result.setTerm(processTerm(e.elements().get(1)));
+        return result;
+    }
+
     private SimpleTerm processSimpleTerm(Element e) {
         return new SimpleTerm(e);
     }
@@ -800,6 +868,15 @@ public class ESX_Processor extends XMLApplication {
             case "Circumfix-Term":
                 result = processCircumfixTerm(e);
                 break;
+            case "Forgetful-Functor-Term":
+                result = processForgetfulFunctorTerm(e);
+                break;
+            case "Fraenkel-Term":
+                result = processFraenkelTerm(e);
+                break;
+            case "Global-Choice-Term":
+                result = processGlobalChoiceTerm(e);
+                break;
             case "Infix-Term":
                 result = processInfixTerm(e);
                 break;
@@ -815,8 +892,14 @@ public class ESX_Processor extends XMLApplication {
             case "Private-Functor-Term":
                 result = processPrivateFunctorTerm(e);
                 break;
+            case "Qualification-Term":
+                result = processQualificationTerm(e);
+                break;
             case "Selector-Term":
                 result = processSelectorTerm(e);
+                break;
+            case "Simple-Fraenkel-Term":
+                result = processSimpleFraenkelTerm(e);
                 break;
             case "Simple-Term":
                 result = processSimpleTerm(e);
@@ -1160,6 +1243,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Definition-Item":
                 result = processDefinitionItem(e);
+                break;
+            case "Existential-Assumption":
+                result = processExistentialAssumption(e);
                 break;
             case "Func-Synonym":
                 result = processFuncSynonym(e);

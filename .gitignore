@@ -4,7 +4,7 @@ text/
 *.*~
 mml.lar
 esx.bat
-esx_errors.txt
+esx_errors*.txt
 target/
 pom.xml.tag
 pom.xml.releaseBackup

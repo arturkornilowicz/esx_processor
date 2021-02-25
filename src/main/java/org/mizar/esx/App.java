@@ -14,11 +14,11 @@ public class App extends ESX_Processor {
         Errors errors = new Errors(app.getFileName());
         try {
             app.processArticle();
-//            System.out.println("Article:\n" + app.getTextProper());
+            System.out.println("Article:\n" + app.getTextProper());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-//            errors.printErrors();
+            errors.printErrors();
             errors.writeErrors();
         }
     }

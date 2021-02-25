@@ -9,7 +9,10 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ExistentialAssumption extends EsxElement {
+public class ExistentialAssumption extends Item {
+
+    private QualifiedSegments qualifiedSegments;
+    private Conditions conditions;
 
     public ExistentialAssumption(Element element) {
         super(element);
@@ -17,6 +20,6 @@ public class ExistentialAssumption extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "given " + qualifiedSegments + " such " + conditions;
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ForgetfulFunctorTerm extends EsxElement {
+public class ForgetfulFunctorTerm extends EsxElement implements TermInterface {
 
     private String absoluteconstrMMLId;
     private String absolutepatternMMLId;
@@ -20,6 +20,8 @@ public class ForgetfulFunctorTerm extends EsxElement {
     private String position;
     private String sort;
     private String spelling;
+
+    private TermInterface term;
 
     public ForgetfulFunctorTerm(Element element) {
         super(element);

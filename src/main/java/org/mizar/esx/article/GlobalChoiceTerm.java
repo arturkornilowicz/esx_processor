@@ -9,10 +9,12 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class GlobalChoiceTerm extends EsxElement {
+public class GlobalChoiceTerm extends EsxElement implements TermInterface {
 
     private String position;
     private String sort;
+
+    private TypeInterface type;
 
     public GlobalChoiceTerm(Element element) {
         super(element);
@@ -22,6 +24,6 @@ public class GlobalChoiceTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "the " + type;
     }
 }

@@ -9,7 +9,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Contradiction extends EsxElement {
+public class Contradiction extends EsxElement implements FormulaInterface {
 
     private String position;
     private String sort;
@@ -22,6 +22,6 @@ public class Contradiction extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "contradiction";
     }
 }

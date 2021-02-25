@@ -9,10 +9,14 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class FraenkelTerm extends EsxElement {
+public class FraenkelTerm extends EsxElement implements TermInterface {
 
     private String position;
     private String sort;
+
+    private VariableSegments variableSegments;
+    private TermInterface term;
+    private FormulaInterface formula;
 
     public FraenkelTerm(Element element) {
         super(element);
@@ -22,6 +26,6 @@ public class FraenkelTerm extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "{" + term + " " + variableSegments + " : " + formula + "}";
     }
 }
