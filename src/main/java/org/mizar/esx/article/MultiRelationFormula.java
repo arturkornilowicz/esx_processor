@@ -9,10 +9,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class MultiRelationFormula extends EsxElement {
+public class MultiRelationFormula extends EsxElement implements FormulaInterface {
 
     private String position;
     private String sort;
+
+    private FormulaInterface formula;
+    private ArrayList<RightSideOfRelationFormula> rightFormulas = new ArrayList<>();
 
     public MultiRelationFormula(Element element) {
         super(element);
@@ -22,6 +25,6 @@ public class MultiRelationFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return formula + " .= " + rightFormulas;
     }
 }

@@ -25,6 +25,8 @@ public class RightSideOfRelationFormula extends EsxElement {
     private String sort;
     private String spelling;
 
+    private Arguments arguments;
+
     public RightSideOfRelationFormula(Element element) {
         super(element);
         this.absoluteconstrMMLId = Misc.assignAttrValue(element,"absoluteconstrMMLId");
@@ -44,6 +46,6 @@ public class RightSideOfRelationFormula extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return arguments.toString();
     }
 }

@@ -381,11 +381,14 @@ public class ESX_Processor extends XMLApplication {
             case "FlexaryDisjunctive-Formula":
                 result = processFlexaryDisjunctiveFormula(e);
                 break;
-            case "Negated-Formula":
-                result = processNegatedFormula(e);
-                break;
             case "Multi-Attributive-Formula":
                 result = processMultiAttributiveFormula(e);
+                break;
+            case "Multi-Relation-Formula":
+                result = processMultiRelationFormula(e);
+                break;
+            case "Negated-Formula":
+                result = processNegatedFormula(e);
                 break;
             case "Private-Predicate-Formula":
                 result = processPrivatePredicateFormula(e);
@@ -556,6 +559,14 @@ public class ESX_Processor extends XMLApplication {
         MultiAttributiveFormula result = new MultiAttributiveFormula(e);
         result.setSubject(processTerm(e.elements().get(0)));
         result.setAdjectiveCluster(processAdjectiveCluster(e.element("Adjective-Cluster")));
+        return result;
+    }
+
+    private MultiRelationFormula processMultiRelationFormula(Element e) {
+        MultiRelationFormula result = new MultiRelationFormula(e);
+        result.setFormula(processFormula(e.elements().get(0)));
+        for (int i = 1; i < e.elements().size(); i++)
+            result.getRightFormulas().add(processRightSideOfRelationFormula(e.elements().get(i)));
         return result;
     }
 
@@ -821,6 +832,12 @@ public class ESX_Processor extends XMLApplication {
     private Scope processScope(Element e) {
         Scope result = new Scope(e);
         result.setFormula(processFormula(e.elements().get(0)));
+        return result;
+    }
+
+    private RightSideOfRelationFormula processRightSideOfRelationFormula(Element e) {
+        RightSideOfRelationFormula result = new RightSideOfRelationFormula(e);
+        result.setArguments(processArguments(e.element("Arguments")));
         return result;
     }
 
