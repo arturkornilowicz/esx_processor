@@ -1451,13 +1451,18 @@ public class ESX_Processor extends XMLApplication {
 
     private Substitution processSubstitution(Element e) {
         Substitution result = new Substitution(e);
+        actions.actionSubstitution(result);
         return result;
     }
 
     private Substitutions processSubstitutions(Element e) {
         Substitutions result = new Substitutions();
+
+        actions.actionSubstitutionsBefore(result);
         for (Element element: e.elements())
             result.getSubstitutions().add(processSubstitution(element));
+        actions.actionSubstitutionsAfter(result);
+        
         return result;
     }
 

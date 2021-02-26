@@ -1356,4 +1356,13 @@ public interface Actions {
 
     default void actionStructurePatternAfterLoci(PatternInterface result) {
     }
+
+    default void actionSubstitution(Substitution result) {
+    }
+
+    default void actionSubstitutionsBefore(Substitutions result) {
+    }
+
+    default void actionSubstitutionsAfter(Substitutions result) {
+    }
 }
