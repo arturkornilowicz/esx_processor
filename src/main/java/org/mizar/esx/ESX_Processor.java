@@ -1449,9 +1449,15 @@ public class ESX_Processor extends XMLApplication {
         return result;
     }
 
+    private Substitution processSubstitution(Element e) {
+        Substitution result = new Substitution(e);
+        return result;
+    }
+
     private Substitutions processSubstitutions(Element e) {
         Substitutions result = new Substitutions();
-        // TODO
+        for (Element element: e.elements())
+            result.getSubstitutions().add(processSubstitution(element));
         return result;
     }
 
