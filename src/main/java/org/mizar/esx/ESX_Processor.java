@@ -1285,23 +1285,20 @@ public class ESX_Processor extends XMLApplication {
             case "Identify":
                 result = processIdentify(e);
                 break;
+            case "Loci-Declaration":
+                result = processLociDeclaration(e);
+                break;
             case "Mode-Definition":
                 result = processModeDefinition(e);
                 break;
             case "Mode-Synonym":
                 result = processModeSynonym(e);
                 break;
-            case "Loci-Declaration":
-                result = processLociDeclaration(e);
-                break;
             case "Pragma":
                 result = processPragma(e);
                 break;
             case "Pred-Antonym":
                 result = processPredAntonym(e);
-                break;
-            case "Scheme-Head":
-                result = processSchemeHead(e);
                 break;
             case "Pred-Synonym":
                 result = processPredSynonym(e);
@@ -1323,6 +1320,9 @@ public class ESX_Processor extends XMLApplication {
                 break;
             case "Scheme-Block-Item":
                 result = processSchemeBlockItem(e);
+                break;
+            case "Scheme-Head":
+                result = processSchemeHead(e);
                 break;
             case "Section-Pragma":
                 result = processSection(e);

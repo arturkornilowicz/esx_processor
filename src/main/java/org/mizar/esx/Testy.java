@@ -20,7 +20,10 @@ public class Testy extends ESX_Processor {
             System.out.println(app.getTextProper().getItems().size());
 
             for (int i = 0; i < app.getTextProper().getItems().size(); i++) {
-                System.out.println(app.getTextProper().getItems().get(i).getBlock());
+                if (app.getTextProper().getItems().get(i).getBlock() != null) {
+                    System.out.println(app.getTextProper().getItems().get(i).getBlock().getKind());
+                    System.out.println(app.getTextProper().getItems().get(i).getBlock().getItems().size() + " item(s)");
+                }
             }
         } catch (Exception e) {
             RTE = true;
