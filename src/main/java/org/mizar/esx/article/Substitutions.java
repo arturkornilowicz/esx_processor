@@ -11,6 +11,8 @@ import org.mizar.esx.*;
 
 public class Substitutions extends EsxElement {
 
+    private ArrayList<Substitution> substitutions = new ArrayList<>();
+
     public Substitutions(Element element) {
         super(element);
     }
