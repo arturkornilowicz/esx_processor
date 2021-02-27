@@ -12,7 +12,7 @@ import org.mizar.esx.*;
 public class StructureDefinition extends Item {
 
     private Ancestors ancestors;
-    private PatternInterface pattern;
+    private StructurePattern pattern;
     private FieldSegments fieldSegments;
     private StructurePatternsRendering structurePatternsRendering;
 

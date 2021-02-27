@@ -14,7 +14,7 @@ public class PredicateDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private PatternInterface pattern;
+    private PredicatePattern pattern;
     private Definiens definiens;
 
     public PredicateDefinition(Element element) {

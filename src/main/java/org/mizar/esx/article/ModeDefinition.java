@@ -14,7 +14,7 @@ public class ModeDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private PatternInterface pattern;
+    private ModePattern pattern;
     private ModeDescriptionInterface modeDescription;
 
     public ModeDefinition(Element element) {

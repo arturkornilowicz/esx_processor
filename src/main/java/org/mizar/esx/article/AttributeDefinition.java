@@ -14,7 +14,7 @@ public class AttributeDefinition extends Item {
     private String MMLId;
 
     private Redefine redefine;
-    private PatternInterface pattern;
+    private AttributePattern pattern;
     private Definiens definiens;
 
     public AttributeDefinition(Element element) {

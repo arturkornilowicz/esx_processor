@@ -116,7 +116,7 @@ public class ESX_Processor extends XMLApplication {
         actions.actionAttributeDefinitionAfterRedefine(result);
 
         actions.actionAttributeDefinitionBeforePattern(result);
-        result.setPattern(processPattern(e.elements().get(1)));
+        result.setPattern((AttributePattern)processPattern(e.elements().get(1)));
         actions.actionAttributeDefinitionAfterPattern(result);
 
         actions.actionAttributeDefinitionBeforeDefiniens(result);
@@ -850,7 +850,7 @@ public class ESX_Processor extends XMLApplication {
         actions.actionModeDefinitionAfterRedefine(result);
 
         actions.actionModeDefinitionBeforePattern(result);
-        result.setPattern(processPattern(e.elements().get(1)));
+        result.setPattern((ModePattern)processPattern(e.elements().get(1)));
         actions.actionModeDefinitionAfterPattern(result);
 
         actions.actionModeDefinitionBeforeModeDescription(result);
@@ -1140,7 +1140,7 @@ public class ESX_Processor extends XMLApplication {
         actions.actionPredicateDefinitionAfterRedefine(result);
 
         actions.actionPredicateDefinitionBeforePattern(result);
-        result.setPattern(processPattern(e.elements().get(1)));
+        result.setPattern((PredicatePattern)processPattern(e.elements().get(1)));
         actions.actionPredicateDefinitionAfterPattern(result);
 
         actions.actionPredicateDefinitionBeforeDefiniens(result);
@@ -1782,7 +1782,7 @@ public class ESX_Processor extends XMLApplication {
         actions.actionStructureDefinitionAfterAncestors(result);
 
         actions.actionStructureDefinitionBeforePattern(result);
-        result.setPattern(processPattern(e.element("Structure-Pattern")));
+        result.setPattern((StructurePattern)processPattern(e.element("Structure-Pattern")));
         actions.actionStructureDefinitionAfterPattern(result);
 
         actions.actionStructureDefinitionBeforeFieldSegments(result);
