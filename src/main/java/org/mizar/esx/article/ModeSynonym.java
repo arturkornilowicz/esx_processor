@@ -11,7 +11,7 @@ import org.mizar.esx.*;
 
 public class ModeSynonym extends Item {
 
-    private PatternInterface synonym;
+    private ModePattern synonym;
     private PatternShapedExpression original;
 
     public ModeSynonym(Element element) {

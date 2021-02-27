@@ -11,7 +11,7 @@ import org.mizar.esx.*;
 
 public class AttrAntonym extends Item {
 
-    private PatternInterface antonym;
+    private AttributePattern antonym;
     private PatternShapedExpression original;
 
     public AttrAntonym(Element element) {

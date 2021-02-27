@@ -11,7 +11,7 @@ import org.mizar.esx.*;
 
 public class PredSynonym extends Item {
 
-    private PatternInterface synonym;
+    private PredicatePattern synonym;
     private PatternShapedExpression original;
 
     public PredSynonym(Element element) {

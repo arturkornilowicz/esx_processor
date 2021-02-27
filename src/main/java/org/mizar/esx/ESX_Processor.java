@@ -74,7 +74,7 @@ public class ESX_Processor extends XMLApplication {
         AttrAntonym result = new AttrAntonym(e);
 
         actions.actionAttrAntonymBeforePattern(result);
-        result.setAntonym(processPattern(e.element("Attribute-Pattern")));
+        result.setAntonym((AttributePattern)processPattern(e.element("Attribute-Pattern")));
         actions.actionAttrAntonymAfterPattern(result);
 
         actions.actionAttrAntonymBeforeOriginal(result);
@@ -88,7 +88,7 @@ public class ESX_Processor extends XMLApplication {
         AttrSynonym result = new AttrSynonym(e);
 
         actions.actionAttrSynonymBeforeSynonym(result);
-        result.setSynonym(processPattern(e.element("Attribute-Pattern")));
+        result.setSynonym((AttributePattern)processPattern(e.element("Attribute-Pattern")));
         actions.actionAttrSynonymAfterSynonym(result);
 
         actions.actionAttrSynonymBeforeOriginal(result);
@@ -883,7 +883,7 @@ public class ESX_Processor extends XMLApplication {
         ModeSynonym result = new ModeSynonym(e);
 
         actions.actionModeSynonymBeforeSynonym(result);
-        result.setSynonym(processPattern(e.element("Mode-Pattern")));
+        result.setSynonym((ModePattern)processPattern(e.element("Mode-Pattern")));
         actions.actionModeSynonymAfterSynonym(result);
 
         actions.actionModeSynonymBeforeOriginal(result);
@@ -1108,7 +1108,7 @@ public class ESX_Processor extends XMLApplication {
         PredAntonym result = new PredAntonym(e);
 
         actions.actionPredAntonymBeforeAntonym(result);
-        result.setAntonym(processPattern(e.element("Predicate-Pattern")));
+        result.setAntonym((PredicatePattern)processPattern(e.element("Predicate-Pattern")));
         actions.actionPredAntonymAfterAntonym(result);
 
         actions.actionPredAntonymBeforeOrginal(result);
@@ -1122,7 +1122,7 @@ public class ESX_Processor extends XMLApplication {
         PredSynonym result = new PredSynonym(e);
 
         actions.actionPredSynonymBeforePattern(result);
-        result.setSynonym(processPattern(e.element("Predicate-Pattern")));
+        result.setSynonym((PredicatePattern)processPattern(e.element("Predicate-Pattern")));
         actions.actionPredSynonymAfterPattern(result);
 
         actions.actionPredSynonymBeforeOriginal(result);

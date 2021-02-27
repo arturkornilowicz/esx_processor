@@ -11,7 +11,7 @@ import org.mizar.esx.*;
 
 public class PredAntonym extends Item {
 
-    private PatternInterface antonym;
+    private PredicatePattern antonym;
     private PatternShapedExpression original;
 
     public PredAntonym(Element element) {

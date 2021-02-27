@@ -11,7 +11,7 @@ import org.mizar.esx.*;
 
 public class AttrSynonym extends Item {
 
-    private PatternInterface synonym;
+    private AttributePattern synonym;
     private PatternShapedExpression original;
 
     public AttrSynonym(Element element) {
