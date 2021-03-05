@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -18,5 +19,11 @@ public class Existence extends EsxElement implements CorrectnessConditionInterfa
     @Override
     public String toString() {
         return "existence";
+    }
+
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionExistence(this);
     }
 }

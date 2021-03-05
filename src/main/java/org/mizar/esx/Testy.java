@@ -4,7 +4,33 @@ import org.mizar.esx.actions.Actions;
 import org.mizar.esx.article.*;
 import org.mizar.esx.errors.*;
 
-import java.util.Locale;
+class TeX implements Actions {
+
+    @Override
+    public void actionSection(SectionPragma result) {
+        System.out.println("BEGIN");
+    }
+
+    @Override
+    public void actionTheoremItemAfterProposition(TheoremItem result) {
+        System.out.println(result.getProposition().getLabel());
+    }
+
+    @Override
+    public void actionReservationBeforeReservationSegments(Reservation result) {
+        System.out.println("From now on ...");
+    }
+
+    @Override
+    public void actionPragmaAfter(Pragma result) {
+        System.out.println(result.getPragma());
+    }
+
+    @Override
+    public void actionVariable(Variable result) {
+        System.out.println(result.getSpelling());
+    }
+}
 
 public class Testy extends ESX_Processor {
 
@@ -16,8 +42,8 @@ public class Testy extends ESX_Processor {
         super(pathName, fileName, fileExtension, actions);
     }
 
-    public static void main(String[] args ) {
-        Testy app = new Testy("text","a",".esx");
+    public static void main(String[] args) {
+        Testy app = new Testy("d:/users/artur/mizar/test", "gwizdka", ".esx", new TeX());
         System.out.println(app.getFileName() + " processing.");
         Errors errors = new Errors(app.getFileName());
         boolean RTE = false;

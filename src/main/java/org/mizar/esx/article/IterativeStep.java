@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -15,7 +16,7 @@ public class IterativeStep extends EsxElement {
 
     public IterativeStep(Element element) {
         super(element);
-        this.position = Misc.assignAttrValue(element,"position");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override

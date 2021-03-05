@@ -8,8 +8,8 @@ public class App extends ESX_Processor {
         super(pathName, fileName, fileExtension);
     }
 
-    public static void main(String[] args ) {
-        App app = new App(args[0],args[1],".esx");
+    public static void main(String[] args) {
+        App app = new App(args[0], args[1], ".esx");
         System.out.println(app.getFileName() + " processing.");
         Errors errors = new Errors(app.getFileName());
         boolean RTE = false;

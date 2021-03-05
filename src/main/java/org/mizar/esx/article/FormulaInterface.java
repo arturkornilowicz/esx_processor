@@ -1,3 +1,4 @@
 package org.mizar.esx.article;
 
-public interface FormulaInterface {}
+public interface FormulaInterface {
+}

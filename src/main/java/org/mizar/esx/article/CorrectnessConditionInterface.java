@@ -1,3 +1,4 @@
 package org.mizar.esx.article;
 
-public interface CorrectnessConditionInterface {}
+public interface CorrectnessConditionInterface {
+}

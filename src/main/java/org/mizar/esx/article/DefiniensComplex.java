@@ -1,9 +1,7 @@
 package org.mizar.esx.article;
 
-import java.util.*;
 import lombok.*;
 import org.dom4j.*;
-import org.mizar.esx.*;
 
 @Setter
 @Getter
@@ -11,7 +9,7 @@ import org.mizar.esx.*;
 
 public class DefiniensComplex extends Definiens {
 
-    private PartialDefiniensList partialDefiniensList;
+    private PartialDefiniensListInterface partialDefiniensList;
     private Otherwise otherwise;
 
     public DefiniensComplex(Element element) {
@@ -19,5 +17,7 @@ public class DefiniensComplex extends Definiens {
     }
 
     @Override
-    public String toString() { return partialDefiniensList + " " + otherwise; }
+    public String toString() {
+        return partialDefiniensList + " " + otherwise;
+    }
 }

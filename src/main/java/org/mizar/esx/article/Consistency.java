@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -18,5 +19,10 @@ public class Consistency extends EsxElement implements CorrectnessConditionInter
     @Override
     public String toString() {
         return "consistency";
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionConsistency(this);
     }
 }

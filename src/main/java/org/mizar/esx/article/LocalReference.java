@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -19,11 +20,11 @@ public class LocalReference extends EsxElement {
 
     public LocalReference(Element element) {
         super(element);
-        this.idnr = Misc.assignAttrValue(element,"idnr");
-        this.labelnr = Misc.assignAttrValue(element,"labelnr");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.serialnr = Misc.assignAttrValue(element,"serialnr");
-        this.spelling = Misc.assignAttrValue(element,"spelling");
+        this.idnr = Misc.assignAttrValue(element, "idnr");
+        this.labelnr = Misc.assignAttrValue(element, "labelnr");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.serialnr = Misc.assignAttrValue(element, "serialnr");
+        this.spelling = Misc.assignAttrValue(element, "spelling");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -17,13 +18,18 @@ public class TextProper extends Block {
 
     public TextProper(Element element) {
         super(element);
-        this.articleext = Misc.assignAttrValue(element,"articleext");
-        this.articleid = Misc.assignAttrValue(element,"articleid");
-        this.position = Misc.assignAttrValue(element,"position");
+        this.articleext = Misc.assignAttrValue(element, "articleext");
+        this.articleid = Misc.assignAttrValue(element, "articleid");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionTextProper(this);
     }
 }

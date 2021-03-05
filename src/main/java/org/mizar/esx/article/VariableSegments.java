@@ -1,9 +1,11 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -20,5 +22,13 @@ public class VariableSegments extends EsxElement {
     @Override
     public String toString() {
         return variableSegments.toString();
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionVariableSegmentsBefore(this);
+        for (Element element : getElement().elements())
+            getVariableSegments().add((VariableSegmentInterface) EsxElementFactory.create(element));
+        ESX_Processor.actions.actionVariableSegmentsAfter(this);
     }
 }

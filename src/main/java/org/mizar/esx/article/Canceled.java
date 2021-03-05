@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -18,12 +19,19 @@ public class Canceled extends EsxElement implements PragmaInterface {
 
     public Canceled(Element element) {
         super(element);
-        this.MMLId = Misc.assignAttrValue(element,"MMLId");
-        this.amount = Misc.assignAttrValue(element,"amount");
-        this.kind = Misc.assignAttrValue(element,"kind");
-        this.position = Misc.assignAttrValue(element,"position");
+        this.MMLId = Misc.assignAttrValue(element, "MMLId");
+        this.amount = Misc.assignAttrValue(element, "amount");
+        this.kind = Misc.assignAttrValue(element, "kind");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override
-    public String toString() { return "::$" + kind + " " + amount; }
+    public String toString() {
+        return "::$" + kind + " " + amount;
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionCanceled(this);
+    }
 }

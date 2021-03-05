@@ -1,10 +1,11 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
-import org.w3c.dom.Attr;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -21,5 +22,13 @@ public class AdjectiveCluster extends EsxElement {
     @Override
     public String toString() {
         return attributes.toString();
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionAdjectiveClusterBeforeAttributes(this);
+        for (Element element : getElement().elements())
+            getAttributes().add((Attribute) EsxElementFactory.create(element));
+        ESX_Processor.actions.actionAdjectiveClusterAfterAttributes(this);
     }
 }

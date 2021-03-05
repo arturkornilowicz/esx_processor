@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -9,13 +10,13 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class StraightforwardJustification extends EsxElement {
+public class StraightforwardJustification extends EsxElement implements JustificationInterface {
 
     private String position;
 
     public StraightforwardJustification(Element element) {
         super(element);
-        this.position = Misc.assignAttrValue(element,"position");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override

@@ -2,6 +2,8 @@ package org.mizar.esx.article;
 
 import lombok.*;
 import org.dom4j.*;
+import org.mizar.esx.ESX_Processor;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -18,5 +20,12 @@ public class Pragma extends Item {
     @Override
     public String toString() {
         return pragma.toString();
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionPragmaBefore(this);
+        setPragma((PragmaInterface) EsxElementFactory.create(getElement().elements().get(0)));
+        ESX_Processor.actions.actionPragmaAfter(this);
     }
 }

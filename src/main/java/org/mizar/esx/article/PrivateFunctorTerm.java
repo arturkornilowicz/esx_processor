@@ -1,9 +1,11 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -22,16 +24,23 @@ public class PrivateFunctorTerm extends EsxElement implements TermInterface {
 
     public PrivateFunctorTerm(Element element) {
         super(element);
-        this.idnr = Misc.assignAttrValue(element,"idnr");
-        this.nr = Misc.assignAttrValue(element,"nr");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.serialnr = Misc.assignAttrValue(element,"serialnr");
-        this.sort = Misc.assignAttrValue(element,"sort");
-        this.spelling = Misc.assignAttrValue(element,"spelling");
+        this.idnr = Misc.assignAttrValue(element, "idnr");
+        this.nr = Misc.assignAttrValue(element, "nr");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.serialnr = Misc.assignAttrValue(element, "serialnr");
+        this.sort = Misc.assignAttrValue(element, "sort");
+        this.spelling = Misc.assignAttrValue(element, "spelling");
     }
 
     @Override
     public String toString() {
         return spelling + "(" + arguments + ")";
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionPrivateFunctorTermBeforeArguments(this);
+        setArguments((Arguments) EsxElementFactory.create(getElement().element("Arguments")));
+        ESX_Processor.actions.actionPrivateFunctorTermAfterArguments(this);
     }
 }

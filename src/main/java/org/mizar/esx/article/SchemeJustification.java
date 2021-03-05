@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -20,12 +21,12 @@ public class SchemeJustification extends EsxElement {
 
     public SchemeJustification(Element element) {
         super(element);
-        this.endposition = Misc.assignAttrValue(element,"endposition");
-        this.idnr = Misc.assignAttrValue(element,"idnr");
-        this.nr = Misc.assignAttrValue(element,"nr");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.schnr = Misc.assignAttrValue(element,"schnr");
-        this.spelling = Misc.assignAttrValue(element,"spelling");
+        this.endposition = Misc.assignAttrValue(element, "endposition");
+        this.idnr = Misc.assignAttrValue(element, "idnr");
+        this.nr = Misc.assignAttrValue(element, "nr");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.schnr = Misc.assignAttrValue(element, "schnr");
+        this.spelling = Misc.assignAttrValue(element, "spelling");
     }
 
     @Override

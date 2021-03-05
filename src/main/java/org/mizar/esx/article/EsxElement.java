@@ -8,10 +8,12 @@ import org.dom4j.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class EsxElement {
+public class EsxElement implements EsxElementInterface {
 
     private Element element;
 
     @Override
-    public String toString() { return element.getName(); }
+    public String toString() {
+        return element.getName();
+    }
 }

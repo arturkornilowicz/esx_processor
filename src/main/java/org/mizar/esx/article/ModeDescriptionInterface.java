@@ -1,3 +1,4 @@
 package org.mizar.esx.article;
 
-public interface ModeDescriptionInterface {}
+public interface ModeDescriptionInterface {
+}

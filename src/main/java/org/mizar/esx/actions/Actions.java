@@ -691,22 +691,22 @@ public interface Actions {
     default void actionPartialDefiniensMeansAfterGuard(PartialDefiniensMeans result) {
     }
 
-    default void actionPartialDefiniensListBefore(PartialDefiniensList result) {
+    default void actionPartialDefiniensListBefore(PartialDefiniensListInterface result) {
     }
 
-    default void actionPartialDefiniensListAfter(PartialDefiniensList result) {
+    default void actionPartialDefiniensListAfter(PartialDefiniensListInterface result) {
     }
 
-    default void actionPartialDefiniensListBeforeDefiniensMeans(PartialDefiniensList result) {
+    default void actionPartialDefiniensListBeforeDefiniensMeans(PartialDefiniensListInterface result) {
     }
 
-    default void actionPartialDefiniensListAfterDefiniensMeans(PartialDefiniensList result) {
+    default void actionPartialDefiniensListAfterDefiniensMeans(PartialDefiniensListInterface result) {
     }
 
-    default void actionPartialDefiniensListBeforeDefiniensEquals(PartialDefiniensList result) {
+    default void actionPartialDefiniensListBeforeDefiniensEquals(PartialDefiniensListInterface result) {
     }
 
-    default void actionPartialDefiniensListAfterDefiniensEquals(PartialDefiniensList result) {
+    default void actionPartialDefiniensListAfterDefiniensEquals(PartialDefiniensListInterface result) {
     }
 
     default void actionPatternShapedExpressionBeforePatter(PatternShapedExpression result) {
@@ -1081,16 +1081,16 @@ public interface Actions {
     default void actionSchemeHeadAfterProvisionalFormulas(SchemeHead result) {
     }
 
-    default void actionSchemaInputSegmentBeforeFunctorSegment(SchemaInputSegment result) {
+    default void actionSchemaInputSegmentBeforeFunctorSegment(SchemaInputSegmentInterface result) {
     }
 
-    default void actionSchemaInputSegmentAfterFunctorSegment(SchemaInputSegment result) {
+    default void actionSchemaInputSegmentAfterFunctorSegment(SchemaInputSegmentInterface result) {
     }
 
-    default void actionSchemaInputSegmentBeforePredicateSegment(SchemaInputSegment result) {
+    default void actionSchemaInputSegmentBeforePredicateSegment(SchemaInputSegmentInterface result) {
     }
 
-    default void actionSchemaInputSegmentAfterPredicateSegment(SchemaInputSegment result) {
+    default void actionSchemaInputSegmentAfterPredicateSegment(SchemaInputSegmentInterface result) {
     }
 
     default void actionFunctorSegmentBeforeVariables(FunctorSegment result) {

@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -19,11 +20,11 @@ public class PlaceholderTerm extends EsxElement {
 
     public PlaceholderTerm(Element element) {
         super(element);
-        this.nr = Misc.assignAttrValue(element,"nr");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.sort = Misc.assignAttrValue(element,"sort");
-        this.spelling = Misc.assignAttrValue(element,"spelling");
-        this.varnr = Misc.assignAttrValue(element,"varnr");
+        this.nr = Misc.assignAttrValue(element, "nr");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.sort = Misc.assignAttrValue(element, "sort");
+        this.spelling = Misc.assignAttrValue(element, "spelling");
+        this.varnr = Misc.assignAttrValue(element, "varnr");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -17,13 +18,18 @@ public class NumeralTerm extends EsxElement implements TermInterface {
 
     public NumeralTerm(Element element) {
         super(element);
-        this.number = Misc.assignAttrValue(element,"number");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.sort = Misc.assignAttrValue(element,"sort");
+        this.number = Misc.assignAttrValue(element, "number");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.sort = Misc.assignAttrValue(element, "sort");
     }
 
     @Override
     public String toString() {
         return number;
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionNumeralTerm(this);
     }
 }

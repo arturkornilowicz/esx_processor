@@ -1,6 +1,7 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
@@ -21,17 +22,22 @@ public class InternalSelectorTerm extends EsxElement implements TermInterface {
 
     public InternalSelectorTerm(Element element) {
         super(element);
-        this.absolutenr = Misc.assignAttrValue(element,"absolutenr");
-        this.nr = Misc.assignAttrValue(element,"nr");
-        this.originnr = Misc.assignAttrValue(element,"originnr");
-        this.position = Misc.assignAttrValue(element,"position");
-        this.sort = Misc.assignAttrValue(element,"sort");
-        this.spelling = Misc.assignAttrValue(element,"spelling");
-        this.varnr = Misc.assignAttrValue(element,"varnr");
+        this.absolutenr = Misc.assignAttrValue(element, "absolutenr");
+        this.nr = Misc.assignAttrValue(element, "nr");
+        this.originnr = Misc.assignAttrValue(element, "originnr");
+        this.position = Misc.assignAttrValue(element, "position");
+        this.sort = Misc.assignAttrValue(element, "sort");
+        this.spelling = Misc.assignAttrValue(element, "spelling");
+        this.varnr = Misc.assignAttrValue(element, "varnr");
     }
 
     @Override
     public String toString() {
         return spelling;
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionInternalSelectorTerm(this);
     }
 }

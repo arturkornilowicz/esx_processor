@@ -1,9 +1,11 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -18,11 +20,22 @@ public class ExplicitlyQualifiedSegment extends EsxElement implements VariableSe
 
     public ExplicitlyQualifiedSegment(Element element) {
         super(element);
-        this.position = Misc.assignAttrValue(element,"position");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override
     public String toString() {
         return variables + " " + type;
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionExplicitlyQualifiedSegmentBeforeVariables(this);
+        setVariables((Variables) EsxElementFactory.create(getElement().element("Variables")));
+        ESX_Processor.actions.actionExplicitlyQualifiedSegmentAfterVariables(this);
+
+        ESX_Processor.actions.actionExplicitlyQualifiedSegmentBeforeType(this);
+        setType((TypeInterface) EsxElementFactory.create(getElement().elements().get(1)));
+        ESX_Processor.actions.actionExplicitlyQualifiedSegmentAfterType(this);
     }
 }

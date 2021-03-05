@@ -1,9 +1,11 @@
 package org.mizar.esx.article;
 
 import java.util.*;
+
 import lombok.*;
 import org.dom4j.*;
 import org.mizar.esx.*;
+import org.mizar.esx.design.EsxElementFactory;
 
 @Setter
 @Getter
@@ -18,11 +20,22 @@ public class LociEquality extends EsxElement {
 
     public LociEquality(Element element) {
         super(element);
-        this.position = Misc.assignAttrValue(element,"position");
+        this.position = Misc.assignAttrValue(element, "position");
     }
 
     @Override
     public String toString() {
         return locus_1 + " = " + locus_2;
+    }
+
+    @Override
+    public void process() {
+        ESX_Processor.actions.actionLociEqualityBeforeLocus_1(this);
+        setLocus_1((Locus) EsxElementFactory.create(getElement().elements().get(0)));
+        ESX_Processor.actions.actionLociEqualityAfterLocus_1(this);
+
+        ESX_Processor.actions.actionLociEqualityBeforeLocus_2(this);
+        setLocus_2((Locus) EsxElementFactory.create(getElement().elements().get(1)));
+        ESX_Processor.actions.actionLociEqualityAfterLocus_2(this);
     }
 }
