@@ -11,11 +11,11 @@ import org.mizar.esx.design.EsxElementFactory;
 @Getter
 @NoArgsConstructor
 
-public class DefiniensMeans extends Definiens {
+public class StandardDefiniens extends Definiens {
 
     private FormulaInterface formula;
 
-    public DefiniensMeans(Element element) {
+    public StandardDefiniens(Element element) {
         super(element);
     }
 

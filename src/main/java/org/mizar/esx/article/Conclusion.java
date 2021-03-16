@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Conclusion extends EsxElement {
+public class Conclusion extends Item {
 
     public Conclusion(Element element) {
         super(element);

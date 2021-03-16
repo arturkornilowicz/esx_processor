@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class ChoiceStatement extends EsxElement {
+public class ChoiceStatement extends Item {
 
     public ChoiceStatement(Element element) {
         super(element);

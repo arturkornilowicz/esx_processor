@@ -11,7 +11,7 @@ import org.mizar.esx.design.EsxElementFactory;
 @Getter
 @NoArgsConstructor
 
-public class Block extends EsxElement {
+public class Block extends EsxElement implements JustificationInterface {
 
     private String endposition;
     private String kind;

@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class RegularStatement extends EsxElement {
+public class RegularStatement extends Item {
 
     public RegularStatement(Element element) {
         super(element);

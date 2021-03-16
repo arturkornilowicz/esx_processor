@@ -11,11 +11,11 @@ import org.mizar.esx.design.EsxElementFactory;
 @Getter
 @NoArgsConstructor
 
-public class DefiniensEquals extends Definiens {
+public class DefiniensViaEquals extends Definiens {
 
     private TermInterface term;
 
-    public DefiniensEquals(Element element) {
+    public DefiniensViaEquals(Element element) {
         super(element);
     }
 

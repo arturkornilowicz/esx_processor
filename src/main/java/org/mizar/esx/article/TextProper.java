@@ -32,4 +32,9 @@ public class TextProper extends Block {
     public void process() {
         ESX_Processor.actions.actionTextProper(this);
     }
+
+    @Override
+    public void before() {
+        System.out.println("BEFORE TEXT PROPER");
+    }
 }

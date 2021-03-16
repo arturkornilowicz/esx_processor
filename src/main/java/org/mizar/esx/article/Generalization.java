@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class Generalization extends EsxElement {
+public class Generalization extends Item {
 
     public Generalization(Element element) {
         super(element);

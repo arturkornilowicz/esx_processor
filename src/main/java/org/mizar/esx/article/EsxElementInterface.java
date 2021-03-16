@@ -4,4 +4,7 @@ public interface EsxElementInterface {
 
     default void process() {
     }
+
+    default void before() {
+    }
 }

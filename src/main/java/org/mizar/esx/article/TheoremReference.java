@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class TheoremReference extends EsxElement {
+public class TheoremReference extends EsxElement implements ReferenceInterface {
 
     private String nr;
     private String number;
@@ -27,6 +27,6 @@ public class TheoremReference extends EsxElement {
 
     @Override
     public String toString() {
-        return super.toString();
+        return spelling + ":" + number;
     }
 }

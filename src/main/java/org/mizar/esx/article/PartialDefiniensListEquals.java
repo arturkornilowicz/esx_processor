@@ -11,9 +11,7 @@ import org.mizar.esx.design.EsxElementFactory;
 @Getter
 @NoArgsConstructor
 
-public class PartialDefiniensListEquals extends EsxElement implements PartialDefiniensListInterface {
-
-    private ArrayList<PartialDefiniensEquals> partialDefiniens = new ArrayList<>();
+public class PartialDefiniensListEquals extends PartialDefiniensList<PartialDefiniensEquals> {
 
     public PartialDefiniensListEquals(Element element) {
         super(element);
@@ -21,7 +19,7 @@ public class PartialDefiniensListEquals extends EsxElement implements PartialDef
 
     @Override
     public String toString() {
-        return partialDefiniens.toString();
+        return getPartialDefiniens().toString();
     }
 
     @Override

@@ -268,10 +268,10 @@ public interface Actions {
     default void actionCorrectnessConditionsAfterCorrectnessConditions(CorrectnessConditions result) {
     }
 
-    default void actionDefiniensMeansBeforeFormula(DefiniensMeans result) {
+    default void actionDefiniensMeansBeforeFormula(StandardDefiniens result) {
     }
 
-    default void actionDefiniensMeansAfterFormula(DefiniensMeans result) {
+    default void actionDefiniensMeansAfterFormula(StandardDefiniens result) {
     }
 
     default void actionDefiniensMeansBeforePartialDefiniensList(DefiniensComplex result) {
@@ -286,10 +286,10 @@ public interface Actions {
     default void actionDefiniensMeansAfterOtherwise(DefiniensComplex result) {
     }
 
-    default void actionDefiniensEqualsBeforeTerm(DefiniensEquals result) {
+    default void actionDefiniensEqualsBeforeTerm(DefiniensViaEquals result) {
     }
 
-    default void actionDefiniensEqualsAfterTerm(DefiniensEquals result) {
+    default void actionDefiniensEqualsAfterTerm(DefiniensViaEquals result) {
     }
 
     default void actionDefiniensEqualsBeforePartialDefiniensList(DefiniensComplex result) {
@@ -1364,5 +1364,11 @@ public interface Actions {
     }
 
     default void actionSubstitutionsAfter(Substitutions result) {
+    }
+
+    default void actionStraightforwardJustificationBefore(StraightforwardJustification result) {
+    }
+
+    default void actionStraightforwardJustificationAfter(StraightforwardJustification result) {
     }
 }

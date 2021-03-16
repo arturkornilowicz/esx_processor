@@ -10,7 +10,7 @@ import org.mizar.esx.*;
 @Getter
 @NoArgsConstructor
 
-public class DefinitionReference extends EsxElement {
+public class DefinitionReference extends EsxElement implements ReferenceInterface {
 
     private String nr;
     private String number;
@@ -26,7 +26,5 @@ public class DefinitionReference extends EsxElement {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
+    public String toString() { return spelling + ":def " + number; }
 }

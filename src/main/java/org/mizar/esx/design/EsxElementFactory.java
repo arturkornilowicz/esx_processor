@@ -518,8 +518,9 @@ public class EsxElementFactory {
                 break;
             default:
                 Errors.error(e, "Unknown Argument of Factory");
-                new IllegalArgumentException("Unknown Argument of Factory");
+                throw new IllegalArgumentException("Unknown Argument of Factory");
         }
+        result.before();
         result.process();
 //        System.out.println("FACTORY RESULT of " + e.getName() + " is " + result );
         return result;
@@ -531,39 +532,40 @@ public class EsxElementFactory {
             return null;
 
         EsxElement result = null;
+        Element elem0 = e.elements().size() > 0 ? e.elements().get(0) : null;
 
         switch (Misc.normalizeName(e.getName())) {
             case "Definiens":
                 if (e.attributeValue(attrs[0]).equals("Formula-Expression") && e.attributeValue(attrs[1]).equals("Simple-Definiens"))
-                    result = new DefiniensMeans(e);
+                    result = new StandardDefiniens(elem0);
                 else if (e.attributeValue(attrs[0]).equals("Formula-Expression") && e.attributeValue(attrs[1]).equals("Conditional-Definiens"))
-                    result = new DefiniensMeansComplex(e);
+                    result = new DefiniensMeansComplex(elem0);
                 else if (e.attributeValue(attrs[0]).equals("Term-Expression") && e.attributeValue(attrs[1]).equals("Simple-Definiens"))
-                    result = new DefiniensEquals(e);
+                    result = new DefiniensViaEquals(elem0);
                 else if (e.attributeValue(attrs[0]).equals("Term-Expression") && e.attributeValue(attrs[1]).equals("Conditional-Definiens"))
-                    result = new DefiniensEqualsComplex(e);
+                    result = new DefiniensEqualsComplex(elem0);
                 break;
             case "Otherwise":
-                if (e.getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
+                if (e.getParent().getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
                     result = new OtherwiseMeans(e);
-                else if (e.getParent().attributeValue(attrs[0]).equals("Term-Expression"))
+                else if (e.getParent().getParent().attributeValue(attrs[0]).equals("Term-Expression"))
                     result = new OtherwiseEquals(e);
                 break;
             case "PartialDefiniens":
-                if (e.getParent().getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
+                if (e.getParent().getParent().getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
                     result = new PartialDefiniensMeans(e);
-                else if (e.getParent().getParent().attributeValue(attrs[0]).equals("Term-Expression"))
+                else if (e.getParent().getParent().getParent().attributeValue(attrs[0]).equals("Term-Expression"))
                     result = new PartialDefiniensEquals(e);
                 break;
             case "PartialDefiniensList":
-                if (e.getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
+                if (e.getParent().getParent().attributeValue(attrs[0]).equals("Formula-Expression"))
                     result = new PartialDefiniensListMeans(e);
-                else if (e.getParent().attributeValue(attrs[0]).equals("Term-Expression"))
+                else if (e.getParent().getParent().attributeValue(attrs[0]).equals("Term-Expression"))
                     result = new PartialDefiniensListEquals(e);
                 break;
             default:
                 Errors.error(e, "Unknown Argument of Factory 2");
-                new IllegalArgumentException("Unknown Argument of Factory 2");
+                throw new IllegalArgumentException("Unknown Argument of Factory 2");
         }
 
         if (result != null)

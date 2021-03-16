@@ -20,7 +20,7 @@ public class App extends ESX_Processor {
             RTE = true;
             e.printStackTrace();
         } finally {
-//            errors.printErrors();
+            errors.printErrors();
             errors.writeErrors(RTE);
         }
     }
